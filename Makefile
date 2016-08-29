@@ -130,6 +130,28 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> $@; \
 	done
 
+# average term frequency
+average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
+	-rm $@
+	touch $@
+	@echo "scaling factor: $$(bc -l <<< \"1./$(ms)\""
+	for f in $^; \
+	do \
+		echo "computing spam average_term frequency for $$f"; \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
+	done
+
+average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
+	-rm $@
+	touch $@
+	@echo "scaling factor: $$(bc -l <<< \"1./$(mh)\""
+	for f in $^; \
+	do \
+		echo "computing ham average_term frequency for $$f"; \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
+	done
 
 clean:
 	-rm rules.spam rules.ham 
