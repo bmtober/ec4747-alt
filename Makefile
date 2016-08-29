@@ -111,7 +111,7 @@ document_frequency.ham: $(HAM:%.eml=%.term.ham)
 
 
 # cosine similarity for spam documents
-document_similarity.spam: $(SPM:%.eml=%.tfidf.spam)
+document_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -121,7 +121,7 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf.spam)
 	done
     
 # cosine similarity for ham documents
-document_similarity.ham: $(HAM:%.eml=%.tfidf.ham)
+document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 	-rm $@
 	touch $@
 	for f in $^; \
