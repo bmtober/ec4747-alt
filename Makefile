@@ -9,9 +9,9 @@ HAM=$(shell awk '$$1 == 1 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
 ms=$(shell awk '$$1 == 0 {n = n + 1}; END {print n}' SPAMTrain.label)
 mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
 
-.PRECIOUS: %.text %.body %.tfidf 
+.PRECIOUS: %.text %.body %.tfidf.spam %.tfidf.ham
 
-all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity 
+all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
 
@@ -80,7 +80,6 @@ rules.ham: corpus.ham
 document_frequency.spam: $(SPM:%.eml=%.term.spam)
 	-rm $@
 	touch $@
-	trap 'rm .vunit.s' EXIT
 	for f in $^; \
 	do \
 		echo "computing spam document frequency for $$f"; \
@@ -92,7 +91,6 @@ document_frequency.spam: $(SPM:%.eml=%.term.spam)
 document_frequency.ham: $(HAM:%.eml=%.term.ham)
 	-rm $@
 	touch $@
-	trap 'rm .vunit.h' EXIT
 	for f in $^; \
 	do \
 		echo "computing ham document frequency for $$f"; \
@@ -104,13 +102,13 @@ document_frequency.ham: $(HAM:%.eml=%.term.ham)
 
 # term-frequency/inverse-document frequency
 %.tfidf.spam: %.term.spam
+	@echo "tf-idf $(ms) $<"
 	vtfidf $(ms) $< document_frequency.spam > $@
 
 %.tfidf.ham: %.term.ham
+	@echo "tf-idf $(ms) $<"
 	vtfidf $(mh) $< document_frequency.ham  > $@
 
-%.tfidf: %.tfidf.spam %.tfidf.ham
-	mv $< $@
 
 # cosine similarity for spam documents
 document_similarity.spam: $(SPM:%.eml=%.tfidf.spam)
@@ -119,7 +117,7 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf.spam)
 	for f in $^; \
 	do \
 		echo "computing spam cosine similarity for $$f"; \
-		vcosine $$f document_frequency.spam; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> $@; \
 	done
     
 # cosine similarity for ham documents
@@ -129,12 +127,8 @@ document_similarity.ham: $(HAM:%.eml=%.tfidf.ham)
 	for f in $^; \
 	do \
 		echo "computing ham cosine similarity for $$f"; \
-		vcosine $$f document_frequency.ham; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> $@; \
 	done
-
-# cosine similarity for spam documents
-document_similarity: document_similarity.spam document_similarity.ham 
-	sort -k2 $^ > $@
 
 
 clean:
