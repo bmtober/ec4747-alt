@@ -29,3 +29,5 @@ checkfile "document_similarity.ham"
 join -j 2  "document_similarity.spam" "document_similarity.ham" | \
   awk '{printf("%s, %f, %f\n", $1, $2, $3)}' > document_similarity.csv
 
+R --silent --vanilla < plot.R  
+
