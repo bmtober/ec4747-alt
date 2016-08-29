@@ -1,0 +1,36 @@
+
+# Run this script in the directory that has the SPAMTrain.label file.
+
+checkscript ()
+{
+  # confirm that a script file is visible in path
+  which "$1" &> /dev/null
+  [ $? -ne 0 ]  && echo "$1 not found in path" && exit
+}
+
+checkscript "vcosine"
+checkscript "vdot"
+checkscript "vmag"
+checkscript "vsum"
+checkscript "vtfidf"
+checkscript "vunit"
+
+make all
+
+# cosine similarity - this is not finished yet
+[ -f "document_similarity" ] && rm "document_similarity"
+touch document_similarity
+
+cat SPAMTrain.label | while read class filename
+do
+  echo "computing cosine similarity for TFIDF/${filename}" >&2
+    
+  # for spam files
+  s=$(vcosine "TFIDF/${filename}" document_frequency_spam)
+
+  # for ham files
+  h=$(vcosine "TFIDF/${filename}" document_frequency_ham)
+
+  echo "$s $h $class $filename"
+done | awk '{printf("%f\t%f\t%i\t%i\t%i\t%s\n", $1, $2, $1<$2, $3, ($1<$2)==$3, $4)}' >> document_similarity
+
