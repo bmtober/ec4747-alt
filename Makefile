@@ -11,7 +11,7 @@ mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
 
 .PRECIOUS: %.text %.body %.tfidf.spam %.tfidf.ham
 
-all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham 
+all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
 
@@ -134,24 +134,24 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
 	-rm $@
 	touch $@
-	@echo "scaling factor: $$(bc -l <<< \"1./$(ms)\""
 	for f in $^; \
 	do \
-		echo "computing spam average_term frequency for $$f"; \
 		vsum $$f $@  > .$@; \
 		mv .$@ $@; \
 	done
+	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
+	mv .$@ $@; \
 
 average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
 	-rm $@
 	touch $@
-	@echo "scaling factor: $$(bc -l <<< \"1./$(mh)\""
 	for f in $^; \
 	do \
-		echo "computing ham average_term frequency for $$f"; \
 		vsum $$f $@  > .$@; \
 		mv .$@ $@; \
 	done
+	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
+	mv .$@ $@; \
 
 clean:
 	-rm rules.spam rules.ham 

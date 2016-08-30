@@ -11,6 +11,7 @@ checkscript ()
 checkscript "vcosine"
 checkscript "vdot"
 checkscript "vmag"
+checkscript "vscale"
 checkscript "vsum"
 checkscript "vtfidf"
 checkscript "vunit"
