@@ -16,6 +16,8 @@ all: rules.spam rules.ham url document_frequency.spam document_frequency.ham doc
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
 
+from: $(SPM:%.eml=%.from) $(HAM:%.eml=%.from) 
+
 # Extract the email subject
 %.subj: %.eml
 	./ExtractSubj.py $< > $@
@@ -28,6 +30,10 @@ url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url)
 %.url: %.body
 	grep 'http://'  $< >  $@ || :
 	grep 'https://' $< >> $@ || :
+	
+# Hack out From
+%.from: %.eml
+	grep 'From:' $< >> $@ || :
 
 
 # create spam file containing email subject lines
