@@ -28,7 +28,10 @@ checkfile "document_similarity.spam"
 checkfile "document_similarity.ham"
 
 join -j 2  "document_similarity.spam" "document_similarity.ham" | \
-  awk '{printf("%s, %f, %f\n", $1, $2, $3)}' > document_similarity.csv
+  awk '{printf("%s\t%f\t%f\n", $1, $2, $3)}' > document_similarity.csv
+
+join -j 2  "average_term_similarity.spam" "average_term_similarity.ham" | \
+  awk '{printf("%s\t%f\t%f\n", $1, $2, $3)}' > average_term_similarity.csv
 
 R --silent --vanilla < plot.R  
 

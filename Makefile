@@ -11,7 +11,8 @@ mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
 
 .PRECIOUS: %.text %.body %.tfidf.spam %.tfidf.ham
 
-all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham
+all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
+
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
 
@@ -110,26 +111,6 @@ document_frequency.ham: $(HAM:%.eml=%.term.ham)
 	vtfidf $(mh) $< document_frequency.ham  > $@
 
 
-# cosine similarity for spam documents
-document_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-		echo "computing spam cosine similarity for $$f"; \
-		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> $@; \
-	done
-    
-# cosine similarity for ham documents
-document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-		echo "computing ham cosine similarity for $$f"; \
-		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> $@; \
-	done
-
 # average term frequency
 average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
 	-rm $@
@@ -140,7 +121,7 @@ average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
 		mv .$@ $@; \
 	done
 	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
-	mv .$@ $@; \
+	mv .$@ $@
 
 average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
 	-rm $@
@@ -151,7 +132,53 @@ average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
 		mv .$@ $@; \
 	done
 	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
-	mv .$@ $@; \
+	sort -k2 .$@ > $@
+	mv .$@ $@
+
+
+# cosine similarity for spam documents
+document_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+	-rm .$@
+	touch .$@
+	for f in $^; \
+	do \
+		echo "computing spam cosine similarity for $$f"; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
+    
+# cosine similarity for ham documents
+document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+	-rm .$@
+	touch .$@
+	for f in $^; \
+	do \
+		echo "computing ham cosine similarity for $$f"; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
+
+
+average_term_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+	-rm .$@
+	touch .$@
+	for f in $^; \
+	do \
+		echo "computing spam cosine similarity for $$f"; \
+		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
+    
+# cosine similarity for ham documents
+average_term_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+	-rm .$@
+	touch .$@
+	for f in $^; \
+	do \
+		echo "computing ham cosine similarity for $$f"; \
+		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
 
 clean:
 	-rm rules.spam rules.ham 
