@@ -9,7 +9,7 @@ HAM=$(shell awk '$$1 == 1 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
 ms=$(shell awk '$$1 == 0 {n = n + 1}; END {print n}' SPAMTrain.label)
 mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
 
-.PRECIOUS: %.text %.body %.tfidf.spam %.tfidf.ham
+.PRECIOUS: %.text %.body %.term %.tfidf %.tfidf
 
 all: rules.spam rules.ham url from document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
 
@@ -77,14 +77,8 @@ rules.ham: corpus.ham
 %.term: %.text
 	cat $< | perl -0777 -lape 's/\s+/\n/g' | sort | uniq -c | sort -k2 > $@
 
-%.term.spam: %.term
-	mv $< $@
-
-%.term.ham: %.term
-	mv $< $@
-
 # document frequency (number of documents a term appears in)
-document_frequency.spam: $(SPM:%.eml=%.term.spam)
+document_frequency.spam: $(SPM:%.eml=%.term)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -95,7 +89,7 @@ document_frequency.spam: $(SPM:%.eml=%.term.spam)
 		mv .$@ $@; \
 	done
 
-document_frequency.ham: $(HAM:%.eml=%.term.ham)
+document_frequency.ham: $(HAM:%.eml=%.term)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -108,17 +102,20 @@ document_frequency.ham: $(HAM:%.eml=%.term.ham)
 
 
 # term-frequency/inverse-document frequency
-%.tfidf.spam: %.term.spam
+%.tfidf.spam: %.term
 	@echo "tf-idf $(ms) $<"
 	vtfidf $(ms) $< document_frequency.spam > $@
 
-%.tfidf.ham: %.term.ham
+%.tfidf.ham: %.term
 	@echo "tf-idf $(ms) $<"
 	vtfidf $(mh) $< document_frequency.ham  > $@
 
+%.tfidf: %.tfidf.spam
+%.tfidf: %.tfidf.ham
+	mv $< $@
 
 # average term frequency
-average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
+average_term_frequency.spam: $(SPM:%.eml=%.term)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -129,7 +126,7 @@ average_term_frequency.spam: $(SPM:%.eml=%.term.spam)
 	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
 	mv .$@ $@
 
-average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
+average_term_frequency.ham: $(HAM:%.eml=%.term)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -143,7 +140,7 @@ average_term_frequency.ham: $(HAM:%.eml=%.term.ham)
 
 
 # cosine similarity for spam documents
-document_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
 	for f in $^; \
@@ -154,7 +151,7 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 	sort -k2 .$@ > $@
     
 # cosine similarity for ham documents
-document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
 	for f in $^; \
@@ -165,7 +162,7 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 	sort -k2 .$@ > $@
 
 
-average_term_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
 	for f in $^; \
@@ -176,7 +173,7 @@ average_term_similarity.spam: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
 	sort -k2 .$@ > $@
     
 # cosine similarity for ham documents
-average_term_similarity.ham: $(SPM:%.eml=%.tfidf.spam) $(HAM:%.eml=%.tfidf.ham)
+average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
 	for f in $^; \
@@ -197,10 +194,8 @@ clean:
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
 	-rm $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
-	-rm $(SPM:%.eml=%.tfidf.s) $(HAM:%.eml=%.tfidf.h)
 	-rm $(SPM:%.eml=%.subj) $(HAM:%.eml=%.subj)
 	-rm $(SPM:%.eml=%.body) $(HAM:%.eml=%.body)
 	-rm $(SPM:%.eml=%.from) $(HAM:%.eml=%.from)
-	-rm TRAINING/*.spam TRAINING/*.ham
 
 
