@@ -11,7 +11,7 @@ mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
 
 .PRECIOUS: %.text %.body %.tfidf.spam %.tfidf.ham
 
-all: rules.spam rules.ham url document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
+all: rules.spam rules.ham url from document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
@@ -190,7 +190,9 @@ clean:
 	-rm rules.spam rules.ham 
 	-rm corpus.spam corpus.ham 
 	-rm document_frequency.spam document_frequency.ham
-	-rm document_similarity.spam document_similarity.ham document_similarity
+	-rm document_similarity.spam document_similarity.ham document_similarity.csv
+	-rm average_term_frequency.spam average_term_frequency.ham 
+	-rm average_term_similarity.spam average_term_similarity.ham average_term_similarity.csv
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
@@ -198,6 +200,7 @@ clean:
 	-rm $(SPM:%.eml=%.tfidf.s) $(HAM:%.eml=%.tfidf.h)
 	-rm $(SPM:%.eml=%.subj) $(HAM:%.eml=%.subj)
 	-rm $(SPM:%.eml=%.body) $(HAM:%.eml=%.body)
+	-rm $(SPM:%.eml=%.from) $(HAM:%.eml=%.from)
 	-rm TRAINING/*.spam TRAINING/*.ham
 
 
