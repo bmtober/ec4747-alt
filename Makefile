@@ -1,9 +1,15 @@
 
+# File listing ordered pairs contianing class label and document name
+LABELS="SPAMTrain.label"
+
+# Directory contain message files
+CORPUS="TRAINING"
+
 # SPM is a list of spam email files
 # HAM is a list of ham email files
 
-SPM=$(shell awk '$$1 == 0 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
-HAM=$(shell awk '$$1 == 1 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
+SPM=$(shell awk '$$1 == 0 {printf("%s/%s ", $(CORPUS), $$2)}' $(LABELS))
+HAM=$(shell awk '$$1 == 1 {printf("%s/%s ", $(CORPUS), $$2)}' $(LABELS))
 
 # Count of number or spam and ham documents
 ms=$(words $(SPM))
