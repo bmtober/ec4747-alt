@@ -6,10 +6,10 @@ SPM=$(shell awk '$$1 == 0 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
 HAM=$(shell awk '$$1 == 1 {printf("TRAINING/%s ", $$2)}' SPAMTrain.label)
 
 # Count of number or spam and ham documents
-ms=$(shell awk '$$1 == 0 {n = n + 1}; END {print n}' SPAMTrain.label)
-mh=$(shell awk '$$1 == 1 {n = n + 1}; END {print n}' SPAMTrain.label)
+ms=$(words $(SPM))
+mh=$(words $(HAM))
 
-.PRECIOUS: %.text %.body %.term %.tfidf %.tfidf
+.PRECIOUS: %.text %.body %.term %.tfidf
 
 all: rules.spam rules.ham url from document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
 
