@@ -24,10 +24,10 @@ checkfile ()
   [ ! -f "${1}" ] && echo "File '${1}' not found" && exit
 }
 
+threshold="${1-1}"
+
 checkfile "document_similarity.spam"
 checkfile "document_similarity.ham"
-
-threshold="${1-1}"
 
 join -j 2  "document_similarity.spam" "document_similarity.ham" | \
   awk -v t=${threshold} '{printf("%s\t%f\t%f\t%f\n", $1, $2, $3, ($2>$3*t))}' > document_similarity.csv
