@@ -83,7 +83,6 @@ document_frequency.spam: $(SPM:%.eml=%.term)
 	touch $@
 	for f in $^; \
 	do \
-		echo "computing spam document frequency for $$f"; \
   	vunit $$f > .vunit.s; \
 		vsum .vunit.s $@  > .$@; \
 		mv .$@ $@; \
@@ -94,7 +93,6 @@ document_frequency.ham: $(HAM:%.eml=%.term)
 	touch $@
 	for f in $^; \
 	do \
-		echo "computing ham document frequency for $$f"; \
 		vunit $$f > .vunit.h; \
 		vsum .vunit.h $@  > .$@; \
 		mv .$@ $@; \
@@ -145,7 +143,6 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	touch .$@
 	for f in $^; \
 	do \
-		echo "computing spam cosine similarity for $$f"; \
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> .$@; \
 	done
 	sort -k2 .$@ > $@
@@ -156,7 +153,6 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	touch .$@
 	for f in $^; \
 	do \
-		echo "computing ham cosine similarity for $$f"; \
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> .$@; \
 	done
 	sort -k2 .$@ > $@
@@ -167,7 +163,6 @@ average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	touch .$@
 	for f in $^; \
 	do \
-		echo "computing spam cosine similarity for $$f"; \
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $$f >> .$@; \
 	done
 	sort -k2 .$@ > $@
@@ -178,7 +173,6 @@ average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	touch .$@
 	for f in $^; \
 	do \
-		echo "computing ham cosine similarity for $$f"; \
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $$f >> .$@; \
 	done
 	sort -k2 .$@ > $@
