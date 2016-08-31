@@ -5,6 +5,8 @@ LABELS="SPAMTrain.label"
 # Directory contain message files
 CORPUS="TRAINING"
 
+threshold=1
+
 # SPM is a list of spam email files
 # HAM is a list of ham email files
 
@@ -17,7 +19,7 @@ mh=$(words $(HAM))
 
 .PRECIOUS: %.text %.body %.term %.tfidf
 
-all: rules.spam rules.ham url from document_frequency.spam document_frequency.ham document_similarity.spam document_similarity.ham average_term_frequency.spam average_term_frequency.ham average_term_similarity.spam average_term_similarity.ham
+all: rules.spam rules.ham url from document_similarity.csv average_term_similarity.csv top_ten_similarity.csv
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
@@ -25,7 +27,7 @@ url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url)
 from: $(SPM:%.eml=%.from) $(HAM:%.eml=%.from) 
 
 # Extract the email subject
-%.subj: %.eml
+%.subj: %.eml stopwords.sed
 	./ExtractSubj.py $< > $@
 
 # Extract the email body
@@ -106,16 +108,16 @@ document_frequency.ham: $(HAM:%.eml=%.term)
 
 
 # term-frequency/inverse-document frequency
-%.tfidf.spam: %.term
+%.tfidf.spam: %.term document_frequency.spam
 	@echo "tf-idf $(ms) $<"
 	vtfidf $(ms) $< document_frequency.spam > $@
 
-%.tfidf.ham: %.term
+%.tfidf.ham: %.term document_frequency.ham
 	@echo "tf-idf $(ms) $<"
 	vtfidf $(mh) $< document_frequency.ham  > $@
 
-%.tfidf: %.tfidf.spam
 %.tfidf: %.tfidf.ham
+%.tfidf: %.tfidf.spam
 	mv $< $@
 
 # average term frequency
@@ -147,6 +149,7 @@ average_term_frequency.ham: $(HAM:%.eml=%.term)
 document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
+	$(MAKE) document_frequency.spam
 	for f in $^; \
 	do \
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> .$@; \
@@ -157,6 +160,7 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
+	$(MAKE) document_frequency.ham
 	for f in $^; \
 	do \
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> .$@; \
@@ -167,6 +171,7 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
+	$(MAKE) average_term_frequency.spam
 	for f in $^; \
 	do \
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $$f >> .$@; \
@@ -177,12 +182,41 @@ average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
+	$(MAKE) average_term_frequency.ham
 	for f in $^; \
 	do \
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $$f >> .$@; \
 	done
 	sort -k2 .$@ > $@
 
+top_ten_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
+	-rm .$@
+	touch .$@
+	$(MAKE) average_term_frequency.spam
+	for f in $^; \
+	do \
+		sort -n $$f | head -100 | sort -k 2 > .top_ten.tfidf ; \
+		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.spam) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
+    
+# cosine similarity for ham documents
+top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
+	-rm .$@
+	touch .$@
+	$(MAKE) average_term_frequency.ham
+	for f in $^; \
+	do \
+		sort -n $$f | head -100 | sort -k 2 > .top_ten.tfidf ; \
+		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.ham) $$f >> .$@; \
+	done
+	sort -k2 .$@ > $@
+
+%.csv: %.ham %.spam
+	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $$1, $$2, $$3, ($$2>$$3*t))}' > $@
+
+
+	
 clean:
 	-rm rules.spam rules.ham 
 	-rm corpus.spam corpus.ham 
