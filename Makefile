@@ -19,7 +19,7 @@ mh=$(words $(HAM))
 
 .PRECIOUS: %.text %.body %.term %.tfidf
 
-all: rules.spam rules.ham url from document_similarity.csv average_term_similarity.csv top_ten_similarity.csv
+all: rules.spam rules.ham url from document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
@@ -213,10 +213,15 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	sort -k2 .$@ > $@
 
 %.csv: %.ham %.spam
-	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $$1, $$2, $$3, ($$2>$$3*t))}' > $@
+	$(MAKE) documents.class
+	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $(basename $$1), $$2, $$3, ($$2>$$3*t))}' > $@
 
-
+documents.class:
+	-rm $@
+	cat $(LABELS) | awk '{printf("%s\t%d\n", $(basename $$2), $$1)}' > .$@
+	sort .$@ > $@
 	
+
 clean:
 	-rm rules.spam rules.ham 
 	-rm corpus.spam corpus.ham 
@@ -224,6 +229,8 @@ clean:
 	-rm document_similarity.spam document_similarity.ham document_similarity.csv
 	-rm average_term_frequency.spam average_term_frequency.ham 
 	-rm average_term_similarity.spam average_term_similarity.ham average_term_similarity.csv
+	-rm top_ten_term_similarity.spam top_ten_term_similarity.ham top_ten_term_similarity.csv
+	-rm documents.class
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
