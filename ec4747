@@ -52,12 +52,6 @@ popd
 
 # output tabulation of cosine similarity between documents and reference
 #
-checkscript "csvlook"
 
-echo "document frequency similarity"   | tee -a output.txt
-csvlook -t document_similarity.csv     | tee -a output.txt
-echo "average term similarity"         | tee -a output.txt
-csvlook -t average_term_similarity.csv | tee -a output.txt
-echo "top ten terms similarity"        | tee -a output.txt
-csvlook -t top_ten_term_similarity.csv | tee -a output.txt
+head *.csv     | tee -a output.txt
 

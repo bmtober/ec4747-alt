@@ -264,30 +264,23 @@ vcosine poem.term spam.term = 0
 vcosine skit.term song.term = 0.0165482
 vcosine skit.term spam.term = 0.0859867
 vcosine song.term spam.term = 0
-document frequency similarity
-|----------------------+-----------+------------+--------|
-|  document            | hamminess | spamminess | class  |
-|----------------------+-----------+------------+--------|
-|  examples/poem.tfidf | 0.283981  | 0.109682   | 1      |
-|  examples/skit.tfidf | 0.077505  | 0.445282   | 0      |
-|  examples/song.tfidf | 0.381000  | 0.122627   | 1      |
-|  examples/spam.tfidf | 0.000000  | 0.000000   | 0      |
-|----------------------+-----------+------------+--------|
-average term similarity
-|----------------------+-----------+------------+--------|
-|  document            | hamminess | spamminess | class  |
-|----------------------+-----------+------------+--------|
-|  examples/poem.tfidf | 0.438251  | 0.280604   | 1      |
-|  examples/skit.tfidf | 0.123234  | 0.994969   | 0      |
-|  examples/song.tfidf | 0.267261  | 0.060721   | 1      |
-|  examples/spam.tfidf | 0.000000  | 0.000000   | 0      |
-|----------------------+-----------+------------+--------|
-top ten terms similarity
-|----------------------+-----------+------------+--------|
-|  document            | hamminess | spamminess | class  |
-|----------------------+-----------+------------+--------|
-|  examples/poem.tfidf | 0.438251  | 0.280604   | 1      |
-|  examples/skit.tfidf | 0.010391  | 0.173524   | 0      |
-|  examples/song.tfidf | 0.267261  | 0.060721   | 1      |
-|  examples/spam.tfidf | 0.000000  | 0.000000   | 0      |
-|----------------------+-----------+------------+--------|
+==> average_term_similarity.csv <==
+document	hamminess	spamminess	class
+examples/poem.tfidf	0.438251	0.280604	1
+examples/skit.tfidf	0.123234	0.994969	0
+examples/song.tfidf	0.267261	0.060721	1
+examples/spam.tfidf	0.000000	0.000000	0
+
+==> document_similarity.csv <==
+document	hamminess	spamminess	class
+examples/poem.tfidf	0.283981	0.109682	1
+examples/skit.tfidf	0.077505	0.445282	0
+examples/song.tfidf	0.381000	0.122627	1
+examples/spam.tfidf	0.000000	0.000000	0
+
+==> top_ten_term_similarity.csv <==
+document	hamminess	spamminess	class
+examples/poem.tfidf	0.438251	0.280604	1
+examples/skit.tfidf	0.010391	0.173524	0
+examples/song.tfidf	0.267261	0.060721	1
+examples/spam.tfidf	0.000000	0.000000	0
