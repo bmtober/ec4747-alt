@@ -1,9 +1,11 @@
 
 # File listing ordered pairs contianing class label and document name
-LABELS="SPAMTrain.label"
+LABELS="examples.label"
+#LABELS="SPAMTrain.label"
 
 # Directory contain message files
-CORPUS="TRAINING"
+CORPUS="examples"
+#CORPUS="TRAINING"
 
 threshold=1
 
@@ -109,11 +111,11 @@ document_frequency.ham: $(HAM:%.eml=%.term)
 
 # term-frequency/inverse-document frequency
 %.tfidf.spam: %.term document_frequency.spam
-	@echo "tf-idf $(ms) $<"
+	@echo "tf-idf spam document count $(ms) $<"
 	vtfidf $(ms) $< document_frequency.spam > $@
 
 %.tfidf.ham: %.term document_frequency.ham
-	@echo "tf-idf $(ms) $<"
+	@echo "tf-idf ham document count $(mh) $<"
 	vtfidf $(mh) $< document_frequency.ham  > $@
 
 %.tfidf: %.tfidf.ham
@@ -213,8 +215,12 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	sort -k2 .$@ > $@
 
 %.csv: %.ham %.spam
+	# Since ham is listed first above, the joined file below will 
+	# three columns: filename, hamminess, and spamminess.
+	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
 	$(MAKE) documents.class
-	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $(basename $$1), $$2, $$3, ($$2>$$3*t))}' > $@
+	printf "%s\t%s\t%s\t%s\n" "document" "hamminess" "spamminess" "class" > $@
+	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $(basename $$1), $$2, $$3, ($$2>$$3*t))}' >> $@
 
 documents.class:
 	-rm $@
