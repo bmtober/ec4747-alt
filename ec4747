@@ -15,43 +15,8 @@ checkscript "vscale"
 checkscript "vsum"
 checkscript "vtfidf"
 checkscript "vunit"
-
-make all
-
-checkfile ()
-{
-  # confirm that a file exists 
-  [ ! -f "${1}" ] && echo "File '${1}' not found" && exit
-}
-
-threshold="${1-1}"
-
-checkfile "document_similarity.csv"
-checkfile "average_term_similarity.csv"
-checkfile "top_ten_term_similarity.csv"
-
-R --silent --vanilla < plot.R  | tee output.txt
-
-
-# show some examples of documents and associated term vectors
-#
-pushd examples
-head -100 poem.eml poem.term | tee -a ../output.txt
-head -100 song.eml song.term | tee -a ../output.txt
-head -100 skit.eml skit.term | tee -a ../output.txt
-head -100 spam.eml spam.term | tee -a ../output.txt
-
-# illustrate term vector dot product and cosine similarity
-#
 checkscript "pairs"
 
-ls *.term  | pairs | while read a b;do echo -n "vdot $a $b = ";vdot $a $b;done       | tee -a ../output.txt
-ls *.term  | pairs | while read a b;do echo -n "vcosine $a $b = ";vcosine $a $b;done | tee -a ../output.txt
-
-popd
-
-# output tabulation of cosine similarity between documents and reference
-#
-
-head *.csv     | tee -a output.txt
+export threshold="${1-1}"
+make all
 

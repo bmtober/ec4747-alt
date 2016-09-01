@@ -7,8 +7,6 @@ LABELS="examples.label"
 CORPUS="examples"
 #CORPUS="TRAINING"
 
-threshold=1
-
 # SPM is a list of spam email files
 # HAM is a list of ham email files
 
@@ -19,9 +17,11 @@ HAM=$(shell awk '$$1 == 1 {printf("%s/%s ", $(CORPUS), $$2)}' $(LABELS))
 ms=$(words $(SPM))
 mh=$(words $(HAM))
 
+threshold ?= 1
+
 .PRECIOUS: %.text %.body %.term %.tfidf
 
-all: rules.spam rules.ham url from document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
+all: rules.spam rules.ham url from report.txt 
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
@@ -154,7 +154,7 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	$(MAKE) document_frequency.spam
 	for f in $^; \
 	do \
-		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $(basename $(notdir $$f)) >> .$@; \
 	done
 	sort -k2 .$@ > $@
     
@@ -165,7 +165,7 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	$(MAKE) document_frequency.ham
 	for f in $^; \
 	do \
-		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
 
@@ -176,7 +176,7 @@ average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	$(MAKE) average_term_frequency.spam
 	for f in $^; \
 	do \
-		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
     
@@ -187,7 +187,7 @@ average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	$(MAKE) average_term_frequency.ham
 	for f in $^; \
 	do \
-		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
 
@@ -198,7 +198,7 @@ top_ten_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	for f in $^; \
 	do \
 		sort -n $$f | head -100 | sort -k 2 > .top_ten.tfidf ; \
-		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.spam) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.spam) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
     
@@ -210,23 +210,54 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	for f in $^; \
 	do \
 		sort -n $$f | head -100 | sort -k 2 > .top_ten.tfidf ; \
-		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.ham) $$f >> .$@; \
+		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
 
-%.csv: %.ham %.spam
-	# Since ham is listed first above, the joined file below will 
-	# three columns: filename, hamminess, and spamminess.
+%.csv: %.spam %.ham
+	# Since spam is listed first above, the joined file below will 
+	# three columns: filename, spamminess, and hamminess.
 	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
-	$(MAKE) documents.class
-	printf "%s\t%s\t%s\t%s\n" "document" "hamminess" "spamminess" "class" > $@
-	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $(basename $$1), $$2, $$3, ($$2>$$3*t))}' >> $@
+	printf "%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "class" > $@
+	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $$1, $$2, $$3, ($$3>$$2*t))}' >> $@
 
-documents.class:
+graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
+	# draw cluster plot
+	R --silent --vanilla < plot.R > $@
+
+samples.txt: $(HAM) $(SPM)
+	# show some examples of documents and associated term vectors
+	#
 	-rm $@
-	cat $(LABELS) | awk '{printf("%s\t%d\n", $(basename $$2), $$1)}' > .$@
-	sort .$@ > $@
-	
+	for f in $^; \
+	do \
+		head -v -n 20 $$f >> $@; \
+	done
+	for f in $(^:%.eml=%.term); \
+	do \
+		echo "==>> $$f <<==" >> $@; \
+		sort -nr $$f | head  -n 16  >> $@; \
+	done
+	for f in $(^:%.eml=%.tfidf); \
+	do \
+		echo "==>> $$f <<==" >> $@; \
+		sort -nr $$f | head  -n 16  >> $@; \
+	done
+
+pairs.txt:
+	# illustrate term vector dot product and cosine similarity
+	#
+	echo "==>> dot products <<==" > $@; \
+	ls $(CORPUS)/*.term  | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
+	echo "==>> cosine similarity <<==" >> $@; \
+	ls $(CORPUS)/*.term  | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
+
+
+report.txt: graphs.txt samples.txt pairs.txt
+	# pull together illustrative material for report and presentation
+	cat $^ > $@
+	head *.csv >> $@
+
 
 clean:
 	-rm rules.spam rules.ham 
@@ -236,7 +267,7 @@ clean:
 	-rm average_term_frequency.spam average_term_frequency.ham 
 	-rm average_term_similarity.spam average_term_similarity.ham average_term_similarity.csv
 	-rm top_ten_term_similarity.spam top_ten_term_similarity.ham top_ten_term_similarity.csv
-	-rm documents.class
+	-rm pairs.txt graphs.txt samples.txt report.txt
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
