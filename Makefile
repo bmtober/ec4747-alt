@@ -221,6 +221,9 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	printf "%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "class" > $@
 	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $$1, $$2, $$3, ($$3>$$2*t))}' >> $@
 
+%.class: %.csv
+	cat $(LABELS) | sed -e 's/\.eml/\.tfidf/'| awk '{printf("%s/%s\t%d\n", $(CORPUS), $$2, $$1)}' > $@
+	
 graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
 	# draw cluster plot
 	R --silent --vanilla < plot.R > $@
@@ -246,11 +249,12 @@ samples.txt: $(HAM) $(SPM)
 
 pairs.txt:
 	# illustrate term vector dot product and cosine similarity
-	#
+	# limit to 5 because doing all would take forever
+	# since it is O(n^2) 
 	echo "==>> dot products <<==" > $@; \
-	ls $(CORPUS)/*.term  | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
+	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
 	echo "==>> cosine similarity <<==" >> $@; \
-	ls $(CORPUS)/*.term  | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
+	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
 
 
 report.txt: graphs.txt samples.txt pairs.txt
