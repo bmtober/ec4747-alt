@@ -17,6 +17,6 @@ checkscript "vtfidf"
 checkscript "vunit"
 checkscript "pairs"
 
-export threshold="${1-1}"
+threshold="${1-1}"
 make all
 

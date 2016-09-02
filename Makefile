@@ -19,7 +19,7 @@ mh=$(words $(HAM))
 
 threshold ?= 1
 
-.PRECIOUS: %.text %.body %.term %.tfidf
+.PRECIOUS: %.text %.body %.term %.tfidf %.csv %.class
 
 all: rules.spam rules.ham url from report.txt 
 
@@ -47,7 +47,7 @@ from: $(SPM:%.eml=%.from) $(HAM:%.eml=%.from)
 
 
 # create spam file containing email subject lines
-corpus.spam: $(SPM:%.eml=%.subj)
+subjects.spam: $(SPM:%.eml=%.subj)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -57,7 +57,7 @@ corpus.spam: $(SPM:%.eml=%.subj)
 	done
 
 # create ham file containing email subject lines
-corpus.ham: $(HAM:%.eml=%.subj)
+subjects.ham: $(HAM:%.eml=%.subj)
 	-rm $@
 	touch $@
 	for f in $^; \
@@ -67,11 +67,11 @@ corpus.ham: $(HAM:%.eml=%.subj)
 	done
 
 # this was for lab 3
-rules.spam: corpus.spam
-	python ./lab3.py corpus.spam > rules.spam
+rules.spam: subjects.spam
+	python ./lab3.py subjects.spam > rules.spam
 
-rules.ham: corpus.ham
-	python ./lab3.py corpus.ham  > rules.ham
+rules.ham: subjects.ham
+	python ./lab3.py subjects.ham  > rules.ham
 
 #
 # term frequency statistics
@@ -218,19 +218,23 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	# Since spam is listed first above, the joined file below will 
 	# three columns: filename, spamminess, and hamminess.
 	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
-	printf "%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "class" > $@
-	join -j 2 $^ | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\n", $$1, $$2, $$3, ($$3>$$2*t))}' >> $@
+	$(MAKE)	$(@:%.csv=%.class)
+	printf "%s\t%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "prediction" "class" > $@
+	join -j 2 $^ | join - $(@:%.csv=%.class) | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\t%i\n", $$1, $$2, $$3, ($$3>$$2*t), $$4)}' >> $@
 
-%.class: %.csv
+
+%.class: 
 	cat $(LABELS) | sed -e 's/\.eml/\.tfidf/'| awk '{printf("%s/%s\t%d\n", $(CORPUS), $$2, $$1)}' > $@
 	
 graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
 	# draw cluster plot
 	R --silent --vanilla < plot.R > $@
 
+roc.txt: document_similarity.class average_term_similarity.class top_ten_term_similarity.class
+	# compute performance 
+
+# show some examples of documents and associated term vectors
 samples.txt: $(HAM) $(SPM)
-	# show some examples of documents and associated term vectors
-	#
 	-rm $@
 	for f in $^; \
 	do \
@@ -264,8 +268,8 @@ report.txt: graphs.txt samples.txt pairs.txt
 
 
 clean:
-	-rm rules.spam rules.ham 
-	-rm corpus.spam corpus.ham 
+	-rm rules.*
+	-rm subjects.*
 	-rm document_frequency.*
 	-rm document_similarity.*
 	-rm average_term_frequency.*
