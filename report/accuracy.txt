@@ -1,3 +1,56 @@
-document_similarity.csv 0.944085
-average_term_similarity.csv 0.871072
-top_ten_term_similarity.csv 0.834566
+> library('txtplot')
+> d <- read.table("document_similarity.acc", header=FALSE, sep=" ")
+> a <- read.table("average_term_similarity.acc", header=FALSE, sep=" ")
+> t <- read.table("top_ten_term_similarity.acc", header=FALSE, sep=" ")
+> txtplot(d$V7,d$V6, ylim=c(0,1), xlab="Threshold", ylab="Accuracy")
+    1 +--+------------+--------****-***-**-----+------------+--+
+      |                      *            *                    |
+      |                    **              * ***               |
+A 0.8 +                 **                       *             +
+c     |         * *** **                          **           |
+c 0.6 +  **** **                                     *         +
+u     |                                               **       |
+r     |                                                 * ***  |
+a 0.4 +                                                        +
+c     |                                                        |
+y 0.2 +                                                        +
+      |                                                        |
+      |                                                        |
+    0 +--+------------+-----------+------------+------------+--+
+         0           0.5          1           1.5           2   
+                              Threshold                         
+> txtplot(a$V7,a$V6, ylim=c(0,1), xlab="Threshold", ylab="Accuracy")
+    1 +--+------------+-----------+---*--*-----+------------+--+
+      |                          ** **  * ** ***               |
+      |                        **                *             |
+A 0.8 +                                           ** **        +
+c     |    ** *** *** **** ***                         **      |
+c 0.6 +  **                                               ***  +
+u     |                                                        |
+r     |                                                        |
+a 0.4 +                                                        +
+c     |                                                        |
+y 0.2 +                                                        +
+      |                                                        |
+      |                                                        |
+    0 +--+------------+-----------+------------+------------+--+
+         0           0.5          1           1.5           2   
+                              Threshold                         
+> txtplot(t$V7,t$V6, ylim=c(0,1), xlab="Threshold", ylab="Accuracy")
+    1 +--+------------+-----------+------------+------------+--+
+      |                             **                         |
+      |                          **   * ****                   |
+A 0.8 +                        **            *** *             +
+c     |    ** *** *** **** ***                    ** ***       |
+c 0.6 +  **                                             * *    +
+u     |                                                    **  |
+r     |                                                        |
+a 0.4 +                                                        +
+c     |                                                        |
+y 0.2 +                                                        +
+      |                                                        |
+      |                                                        |
+    0 +--+------------+-----------+------------+------------+--+
+         0           0.5          1           1.5           2   
+                              Threshold                         
+> q()

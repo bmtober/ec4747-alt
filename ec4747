@@ -17,6 +17,13 @@ checkscript "vtfidf"
 checkscript "vunit"
 checkscript "pairs"
 
-threshold="${1-1}"
-make all
+rm *.acc
+
+for i in {0..40}
+do
+  export threshold=$(bc -l <<< "$i/20")
+  echo "Threshold = $threshold"
+  rm *.csv
+  make acc
+done
 

@@ -1,11 +1,11 @@
 
 # File listing ordered pairs contianing class label and document name
-LABELS="examples.label"
-#LABELS="SPAMTrain.label"
+#LABELS="examples.label"
+LABELS="SPAMTrain.label"
 
 # Directory contain message files
-CORPUS="examples"
-#CORPUS="TRAINING"
+#CORPUS="examples"
+CORPUS="TRAINING"
 
 # SPM is a list of spam email files
 # HAM is a list of ham email files
@@ -232,10 +232,9 @@ graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_sim
 
 %.acc: %.csv
 	# compute performance 
-	cat $< | awk '{s=s+($$4==$$5)}; END {print("$<", s/NR)}' > $@
+	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, (m00+m11)/NR, t)}' >> $@
 
-accuracy.txt: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc
-	cat $^ > $@	
+acc: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc
 
 # show some examples of documents and associated term vectors
 samples.txt: $(HAM) $(SPM)
@@ -265,7 +264,7 @@ pairs.txt:
 	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
 
 
-report.txt: graphs.txt samples.txt pairs.txt accuracy.txt
+report.txt: graphs.txt samples.txt pairs.txt
 
 
 clean:
