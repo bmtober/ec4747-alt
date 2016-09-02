@@ -266,11 +266,11 @@ report.txt: graphs.txt samples.txt pairs.txt
 clean:
 	-rm rules.spam rules.ham 
 	-rm corpus.spam corpus.ham 
-	-rm document_frequency.spam document_frequency.ham
-	-rm document_similarity.spam document_similarity.ham document_similarity.csv
-	-rm average_term_frequency.spam average_term_frequency.ham 
-	-rm average_term_similarity.spam average_term_similarity.ham average_term_similarity.csv
-	-rm top_ten_term_similarity.spam top_ten_term_similarity.ham top_ten_term_similarity.csv
+	-rm document_frequency.*
+	-rm document_similarity.*
+	-rm average_term_frequency.*
+	-rm average_term_similarity.*
+	-rm top_ten_term_similarity.*
 	-rm pairs.txt graphs.txt samples.txt report.txt
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
