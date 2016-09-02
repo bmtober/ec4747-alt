@@ -85,7 +85,7 @@ rules.ham: subjects.ham
 
 # term frequency (term count per document)
 %.term: %.text
-	cat $< | perl -0777 -lape 's/\s+/\n/g' | sort | uniq -c | sort -k2 > $@
+	cat $< | tr '[:punct:]' ' ' | perl -0777 -lape 's/\s+/\n/g' | sort | uniq -c | sort -k2 > $@
 
 # document frequency (number of documents a term appears in)
 document_frequency.spam: $(SPM:%.eml=%.term)
@@ -230,8 +230,12 @@ graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_sim
 	# draw cluster plot
 	R --silent --vanilla < plot.R > $@
 
-roc.txt: document_similarity.class average_term_similarity.class top_ten_term_similarity.class
+%.acc: %.csv
 	# compute performance 
+	cat $< | awk '{s=s+($$4==$$5)}; END {print("$<", s/NR)}' > $@
+
+accuracy.txt: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc
+	cat $^ > $@	
 
 # show some examples of documents and associated term vectors
 samples.txt: $(HAM) $(SPM)
@@ -261,10 +265,7 @@ pairs.txt:
 	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
 
 
-report.txt: graphs.txt samples.txt pairs.txt
-	# pull together illustrative material for report and presentation
-	cat $^ > $@
-	head *.csv >> $@
+report.txt: graphs.txt samples.txt pairs.txt accuracy.txt
 
 
 clean:
