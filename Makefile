@@ -21,7 +21,7 @@ threshold ?= 1
 
 .PRECIOUS: %.text %.body %.term %.tfidf %.csv %.class
 
-all: rules.spam rules.ham url from report.txt 
+all: rules.spam rules.ham url from report
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
@@ -264,7 +264,7 @@ pairs.txt:
 	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
 
 
-report.txt: graphs.txt samples.txt pairs.txt
+report: graphs.txt samples.txt pairs.txt
 
 
 clean:
@@ -275,7 +275,9 @@ clean:
 	-rm average_term_frequency.*
 	-rm average_term_similarity.*
 	-rm top_ten_term_similarity.*
-	-rm pairs.txt graphs.txt samples.txt report.txt
+	-rm pairs.txt graphs.txt samples.txt
+
+clean-all: clean
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
