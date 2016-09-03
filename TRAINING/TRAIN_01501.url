@@ -1,0 +1,3 @@
+<form action="http://www.redlightemail.com/submitsignup.cfm" method="post" name="test" id="test" target="_blank">
+	<input type="hidden" name="nexturl" value="http://www.redlightemail.com/thankyou.cfm?exitconsole=no">
+				<center><font face="Verdana" size="1">This mail is NEVER sent unsolicited, Got it by error ?<br>[ <A target=_blank href="http://www.redlightemail.com/remove.cfm?webmaster@efi.ie">CLICK HERE</a> ] to be removed from our subscribers List !</font></center>

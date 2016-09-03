@@ -1,0 +1,5 @@
+               http://bugs.debian.org/575621
+	deb http://security.debian.org squeeze/updates main contrib non-free
+	http://security-tracker.debian.org/tracker/
+	http://security-tracker.debian.org/tracker/status/release/testing
+Archive: http://lists.debian.org/E1O7HlS-0005nH-55@soler.debian.org

@@ -1,0 +1,8 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024; t=1272781489; bh=ViaGN/G7vOyI0dLFOqEf5qGj8ezQYk3qXSFknEKCq2A=; h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type; b=dwmkgRZGmpyElhK+SGD5svJntt1HfA8zfwxlz2DsKMw0/jexHhA8+AU7qLjvMPUrf5l3hUtmJ2rghPn3c4X7197ER6JR1kUKrd4W7U42mbLc5LLBiodz4I72JAS2Tv2f27Vzszj0bRldKQWM0/+4mPqi/+ITNHpNQIpHfopl0vM=
+  h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+From: Marc Shapiro <mshapiro_42@yahoo.com>
+Resent-From: debian-user@lists.debian.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024; t=1272781489; bh=ViaGN/G7vOyI0dLFOqEf5qGj8ezQYk3qXSFknEKCq2A=; h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type; b=dwmkgRZGmpyElhK+SGD5svJntt1HfA8zfwxlz2DsKMw0/jexHhA8+AU7qLjvMPUrf5l3hUtmJ2rghPn3c4X7197ER6JR1kUKrd4W7U42mbLc5LLBiodz4I72JAS2Tv2f27Vzszj0bRldKQWM0/+4mPqi/+ITNHpNQIpHfopl0vM=
+  h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+From: Marc Shapiro <mshapiro_42@yahoo.com>
+Resent-From: debian-user@lists.debian.org

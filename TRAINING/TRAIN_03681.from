@@ -1,0 +1,4 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024; t=1272781476; bh=CnCWX5/6RrkuGnTNTP1MAi+XCHneE+5v1IBD7geEEkE=; h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type; b=wEkkpzQRVhst2pgJv4zhgj6pUteLWaHIT35euRauiHsTr7+hNozWGmgdKeQxOy//hm+FOwQHGTWHAww/PBKC1cihbJ7RFDPmXDOfaxL9PdvDPnivy8B1kBb+6W+lvcXoZS6eIqglcImHLG2n5AIx33iv2Xl0dcEjIu9hnDIiW1I=
+  h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+From: Marc Shapiro <mshapiro_42@yahoo.com>
+Resent-From: debian-user@lists.debian.org

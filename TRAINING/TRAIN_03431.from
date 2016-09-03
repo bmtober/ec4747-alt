@@ -1,0 +1,3 @@
+From: "=?windows-1251?B?RnJhbmNrIE11bGxlciBXYXRjaGVz?=" <sunilk@barco.com>
+	0.01 FROM_EXCESS_BASE64     From: base64 encoded unnecessarily
+	1.05 FROM_EXCESS_BASE64_2   From: base64 encoded unnecessarily

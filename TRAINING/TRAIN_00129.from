@@ -1,0 +1,8 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.es; s=s1024; t=1274189955; bh=9Qrg+m1tK06ox1fI/PHSS5TZ2uT4CLk5HOVaEvaSi8A=; h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding; b=M3djqsXfpmmYjtrBnd7NcI6qWRZPa5zN/fXqeH2W2JOCtXRPf41x8+yH4MhtAtuhRVX0Q2r4jMAc12THQ0LzBPIUpqc/3pvIPMJEl6ED7QNP95D9lCVAcZ7zQuef6gfylLqI2GJzGGYuTePhejhCQ5mmo3DzV2R2xGoiQKeV15A=
+  h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+From: Antonio Diaz Sanchez <adiazsanchez@yahoo.es>
+Resent-From: debian-user@lists.debian.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.es; s=s1024; t=1274189955; bh=9Qrg+m1tK06ox1fI/PHSS5TZ2uT4CLk5HOVaEvaSi8A=; h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding; b=M3djqsXfpmmYjtrBnd7NcI6qWRZPa5zN/fXqeH2W2JOCtXRPf41x8+yH4MhtAtuhRVX0Q2r4jMAc12THQ0LzBPIUpqc/3pvIPMJEl6ED7QNP95D9lCVAcZ7zQuef6gfylLqI2GJzGGYuTePhejhCQ5mmo3DzV2R2xGoiQKeV15A=
+  h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+From: Antonio Diaz Sanchez <adiazsanchez@yahoo.es>
+Resent-From: debian-user@lists.debian.org

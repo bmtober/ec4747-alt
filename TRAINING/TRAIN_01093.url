@@ -1,0 +1,11 @@
+CVE-2010-0009: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0009
+               http://bugs.debian.org/576304
+CVE-2009-3388: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3388
+               http://bugs.debian.org/575743
+CVE-2010-1150: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1150
+CVE-2009-3938: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3938
+               http://bugs.debian.org/534680
+	deb http://security.debian.org squeeze/updates main contrib non-free
+	http://security-tracker.debian.org/tracker/
+	http://security-tracker.debian.org/tracker/status/release/testing
+Archive: http://lists.debian.org/E1O56tl-0002sS-5n@soler.debian.org

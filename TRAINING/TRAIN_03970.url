@@ -1,0 +1,8 @@
+> deb http://volatile.debian.org/debian-volatile \
+http://git.clamav.net/gitweb?p=clamav-devel.git;a=blob_plain;f=ChangeLog;hb=clamav-0.95.3
+[2] http://www.clamav.net/lang/en/2009/10/05/eol-clamav-094/
+[3] http://www.debian.org/volatile/index.en.html
+[4] http://lists.debian.org/debian-security-announce/2009/msg00228.html
+Archive: http://lists.debian.org/201004182252.41966.debian-security@stephan.homeunix.net
+[5] https://wwws.clamav.net/bugzilla/show_bug.cgi?id=1395
+[6] https://wwws.clamav.net/bugzilla/show_bug.cgi?id=1395#c12

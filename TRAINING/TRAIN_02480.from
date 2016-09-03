@@ -1,0 +1,3 @@
+	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-Identified-User;
+From: godo <goran@dobosevic.com>
+Resent-From: debian-user@lists.debian.org

@@ -1,0 +1,2 @@
+From: Eugen Leitl <eugen@leitl.org>
+Valid whitelisting of From:you@here.net yet invalid random token would get 

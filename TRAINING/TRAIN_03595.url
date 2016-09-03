@@ -1,0 +1,10 @@
+> 	security http://security.debian.org/
+> 	volatile http://volatile.debian.org/debian-volatile/
+> 	debian http://ftp.us.debian.org/debian/
+> 	debian http://debian.cs.binghamton.edu/debian/
+> 	debian http://debian.lcs.mit.edu/debian/
+ 	debian http://ftp.us.debian.org/debian/
+ 	debia2 http://debian.cs.binghamton.edu/debian/
+ 	debia3 http://debian.lcs.mit.edu/debian/
+> Archive: http://lists.debian.org/F6ADABA9-636B-4D51-878C-A8DD8EC73C17@cs.rutgers.edu
+Archive: http://lists.debian.org/20100507012736.GD15335@big.lan.gnu

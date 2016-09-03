@@ -1,0 +1,21 @@
+http://www.debian.org/security/                         Raphael Geissert
+May 03, 2010                          http://www.debian.org/security/faq
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki_1.12.0.orig.tar.gz
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki_1.12.0-2lenny5.diff.gz
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki_1.12.0-2lenny5.dsc
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki_1.12.0-2lenny5_all.deb
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+  http://security.debian.org/pool/updates/main/m/mediawiki/mediawiki-
+For apt-get: deb http://security.debian.org/ stable/updates main
+Package info: `apt-cache show <pkg>' and http://packages.debian.org/<pkg>
+Archive: http://lists.debian.org/201005031925.47383.geissert@debian.org

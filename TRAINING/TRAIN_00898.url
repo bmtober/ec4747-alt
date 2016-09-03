@@ -1,0 +1,10 @@
+<META content="Microsoft FrontPage 4.0" name=GENERATOR><BASE href="http://62.232.161.231/freeinfo/">
+          background="http://62.232.161.231/freeinfo/images/leftside.jpg">
+            <font color="#ffffff" size="2" face="Arial, Helvetica, sans-serif"><b><u><FORM ACTION="http://62.232.161.231/freeinfo/cgi-bin/manager.pl" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="action" VALUE="remove"><INPUT TYPE="HIDDEN" NAME="autoresponder" VALUE=""><INPUT TYPE="HIDDEN" NAME="unsubscribe_redirect" VALUE="http://62.232.161.231/freeinfo/sorry.htm">
+            <img border="0" src="http://62.232.161.231/freeinfo/images/rightsidestuff.jpg"></P>
+                        <FORM ACTION="http://62.232.161.231/freeinfo/cgi-bin/manager.pl" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="subscribe_redirect" VALUE="http://62.232.161.231/freeinfo/thanx.htm">
+<INPUT TYPE="HIDDEN" NAME="unsubscribe_redirect" VALUE="http://62.232.161.231/freeinfo/sorry.htm">
+<INPUT TYPE="HIDDEN" NAME="verify_redirect" VALUE="http://62.232.161.231/freeinfo/confirm.htm">
+                  <DIV align=center><img border="0" src="http://62.232.161.231/freeinfo/images/sept.jpg" width="190" height="167"></DIV></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

@@ -1,0 +1,11 @@
+From: J C Lawrence <claw@kanga.nu>
+For example, for the tmda-users list I want a From: address of
+which rewrites my From: header transparently.  When I get next month's
+    testprint "local_part: ${local_part: $h_From:}"
+    testprint "domain: ${domain: $h_From:}"
+       "${domain: $h_From:}" is "kanga.nu" and
+       "${if exists {/home/${local_part:$h_From:}/.tmda} {true}{false}}" is "true"
+      pipe "/usr/bin/tmda-inject -c /home/${local_part:$h_From:}/.tmda/config"
+  extracts the user from the From: address and pipes the message thru
+  has a From: header which references a local user (suffixes are fine),
+  and that the From: address is fully qualified with a known domain.  If

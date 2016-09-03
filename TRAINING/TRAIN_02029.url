@@ -1,0 +1,20 @@
+http://www.debian.org/security/                       Sébastien Delafond
+May 02, 2010                          http://www.debian.org/security/faq
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1.diff.gz
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0.orig.tar.gz
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1.dsc
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_alpha.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_amd64.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_arm.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_armel.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_hppa.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_i386.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_ia64.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_mips.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_mipsel.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_powerpc.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_s390.deb
+  http://security.debian.org/pool/updates/main/s/squidguard/squidguard_1.2.0-8.4+lenny1_sparc.deb
+For apt-get: deb http://security.debian.org/ stable/updates main
+Package info: `apt-cache show <pkg>' and http://packages.debian.org/<pkg>
+Archive: http://lists.debian.org/20100502125652.GA3528@galadriel.inutil.org

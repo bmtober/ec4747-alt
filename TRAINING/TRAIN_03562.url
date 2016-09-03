@@ -1,0 +1,8 @@
+ I've a site on http://ip:8080/mysite.
+ I want that to appear as http://mysite.com/ - so:
+        RewriteRule     ^/(.*)    http://localhost:8080/mysite/$1 [P]
+ Now, what happens is that apache grabs http://localhost:8080/mysite/ and spits
+    <frame src="http://localhost:8080/reenactors/manage_top_frame"
+    <frame src="http://localhost:8080/reenactors/manage_menu"
+    <frame src="http://localhost:8080/reenactors/manage_workspace"
+http://www.linux.ie/mailman/listinfo/webdev

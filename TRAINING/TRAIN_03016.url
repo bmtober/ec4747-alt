@@ -1,0 +1,29 @@
+<td colspan="3" bgcolor="#cccccc" width="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" border="0" alt="image"></td>
+<td bgcolor="#cccccc" width="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" border="0" alt="image"></td>
+<img src="http://developer.java.sun.com/images/headers/core_ttips_hdr.jpg" width="611" height="160" alt="Core Java Technologies Technical Tips" border="0"></td>
+<td colspan="2" bgcolor="#cccccc" width="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" border="0" alt="image"></td>
+<td height="20">&nbsp;&nbsp;&nbsp;<a href="http://developer.java.sun.com/developer/TechTips/txtarchive/2002/Sept02_GlenM.txt?s=04&w=37" style="text-decoration:none;">View this issue as simple text</a></td>
+<FORM METHOD="GET" ACTION="http://search.java.sun.com/search/java/">
+<INPUT TYPE="image" SRC="http://developer.java.sun.com/images/search.button.gif" ALT="Search" value="search" BORDER="0" WIDTH="55"></td>
+<a href="#1"><img src="http://developer.java.sun.com/images/anchor.gif" border="0" alt="">Using ArrayList and LinkedList</a>
+<a href="#2"><img src="http://developer.java.sun.com/images/anchor.gif" border="0" alt="">Using Zero-Length Arrays</a>
+<td bgcolor="#cccccc" height="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" ALT="Pixel" border="0"></td>
+For more information about Using <code>ArrayList</code> and <code>LinkedLists</code>, see section 16.6, List, and section 16.7, Map and SortedMap, in &quot;<a href="http://java.sun.com/docs/books/javaprog/thirdedition/?s=04&w=37" target="_blank">The Java<sup>TM</sup> Programming Language Third Edition</a>&quot; by Arnold, Gosling, and Holmes. Also see the <a href="http://java.sun.com/docs/books/tutorial/collections/?s=04&w=37" target="_blank">Collections trail in the Java Tutorial, Third Edition</a>.
+<a href="#top">back to top<img src="http://developer.java.sun.com/images/back_to_top.gif" border="0" alt="Pixel"></a>
+<tr><td bgcolor="#ffffff" height="2"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" ALT="Pixel" border="0"></td></tr>
+<td bgcolor="#cccccc" height="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" ALT="Pixel" border="0"></td>
+For more information about using zero-Length arrays, see item 27 &quot;Return zero-length arrays, not nulls&quot; in &quot;<a href="http://java.sun.com/docs/books/effective/?s=04&w=37" target="_blank">Effective Java Programming Language Guide</a>&quot; by Joshua Bloch.
+<a href="#top">back to top<img src="http://developer.java.sun.com/images/back_to_top.gif" border="0" alt="Pixel"></a>
+<tr><td bgcolor="#ffffff" height="2"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" ALT="Pixel" border="0"></td></tr>
+<td bgcolor="#cccccc" height="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" ALT="Pixel" border="0"></td>
+<a href="http://www.sun.com/share/text/termsofuse.html?s=04&w=37"><span class="link">http://www.sun.com/share/text/termsofuse.html</span></a><br>
+<a href="http://www.sun.com/privacy/?s=04&w=37"><span class="link">http://www.sun.com/privacy/</span></a><br>
+<a href="http://developer.java.sun.com/berkeley_license.html?s=04&w=37"><span class="link">http://developer.java.sun.com/berkeley_license.html</span></a>
+    choose the newsletters you want to <a href="http://developer.java.sun.com/subscription/?s=04&w=37"><span class="link">subscribe</span></a> to and click &quot;Update&quot;.<br>
+  - To unsubscribe, go to the <a href="http://developer.java.sun.com/subscription/?s=04&w=37"><span class="link">subscriptions page</span></a>, uncheck the appropriate checkbox, and click &quot;Update&quot;.
+<a href="http://java.sun.com/jdc/TechTips/?s=04&w=37"><span class="link">http://java.sun.com/jdc/TechTips/index.html</span></a>
+<span class="small">Copyright 2002 <a href="http://www.sun.com?s=04&w=37"><span class="link">Sun Microsystems, Inc.</span></a> All rights reserved. 901 San Antonio Road, Palo Alto, California 94303 USA.
+<a href="http://www.sun.com"><img src="http://developer.java.sun.com/images/lgsun.gif" border="0" alt="Sun Microsystems, Inc."></a>
+<td bgcolor="#cccccc" width="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" border="0" alt=""></td>
+<td colspan="3" bgcolor="#cccccc" width="1"><img src="http://developer.java.sun.com/images/pixel.gif" width="1" height="1" border="0" alt=""></td>
+<table bgcolor = "#efefef"><tr><td><a href="http://bulkmail.sun.com/servlet/PreferenceServlet?action=change&pref_name=content-type&pref_value=text&id=216095411795471888">Please send me newsletters in text.</a><br><a href="http://bulkmail.sun.com/unsubscribe?216095411795471888">Please unsubscribe me from this newsletter.</a><img src="http://bulkmail2.sun.com/OTServlet?id=216095411795471888" width=1 height=1></td></tr></table></body>

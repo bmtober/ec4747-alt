@@ -1,0 +1,174 @@
+                     Lockergnome See You at Gnomedex 2002!
+
+  07.09.2002 GnomeREPORT                                   LOOK OVER HERE
+
+
+Content Management Is Key: Need a reason your boss should   Download Tip eBooks
+be sending you to Gnomedex? Some of the leading experts
+on content management solutions (those things we            Latest Windows
+affectionately call blogs) will be sharing the future of   Daily
+blogging and how you can adapt it to both the way you do    Latest Digital
+business and the way you communicate in general. Join      Media
+Evan Williams and Doc Searls as they share pearls of        Latest Tech
+wisdom on blogging, Linux and other open source            Specialist
+applications that are changing our lives. If that's not     Latest Penguin
+enough incentive, remind the boss that THE Internet        Shell
+security guru, Steve Gibson, will be sharing his wisdom     Latest Apple Core
+as well. Register for Gnomedex today!                       Latest Web Weekly
+                                                            Latest Bits & Bytes
+I've finally done it! Lockrgnome's Top 50 Mac OS X Tips     Latest Audio Show
+is in publication and available for purchase at
+GnomeTomes.com. Less than half the tips have appeared in    Low Price Search
+the Apple Core newsletter already, so purchasing them       Our Tech Conference
+means getting mostly brand new content. This represents
+the first thing I've written that people might actually     Microsoft Office
+pay to read, so if we sell one copy, I'll be ecstatic.     Tips
+And hopefully, any of you who check out the tips will       PC Productivity
+find them useful. I know that figuring out how to do each  Tips
+of the 50 things on the list has improved my personal OS    Cool Internet Tips
+X experience.                                               Windows 2000 Tips
+                                                            Windows XP Tips
+Although this newsletter started out with Chris, Randy,     Top 50 Fun Sites
+and I writing sections of the newsletter, time              Must-Know Tech
+constraints have limited the contributions of the other    Terms
+two guys. This does not mean either of them is truly less   Top 50 Useful Sites
+involved, it just means I'm doing more writing. Both        Top 75 Tech Sites
+Chris and Randy regularly send me links to cool Mac stuff   Top 50 PenguinCORE
+they find, much of which will ultimately end up in          Top 50
+upcoming issues. Since the writing will be primarily       PenguinTWEAKS
+mine, I've opted to eliminate the "Review by" links at
+the bottom of each article. Unless otherwise noted, you     See You in August!
+can safely assume I wrote it. If you need to send me an
+e-mail, the E-mail The Editors Link in the sidebar will     Tell a Friend About
+reach me, as well as putting your message in front of      Us!
+Chris and Randy.                                            Suggest a Feature
+                                                            Advertise With Us
+I've been doing some exploring of AppleScript over the      High-Tech Job
+past several months and believe I'm finally confidant      Search
+enough in writing scripts that I'm going to add a section   Chat With Gnomies
+on scripting to the newsletter. I'm curious to know what    Watch The Webcams
+your level of experience with scripting is, because I can   Computer Power User
+either start with some really basic stuff, or skip the
+basics and dive into meatier scripting topics. Either       Read Past Issues
+way, I'm open to some AppleScript suggestions.              Download X-Setup
+                                                            About Lockergnome
+                         See You in August,                 Our Privacy Policy
+                                    Jake Ludington          View More Options
+                                                            Our XML / RSS Feed
+For Mac Outlook users:                                      Syndicate Our Tips
+OS X Tips - http://www.gnometomes.com/tome/                 Link To Lockergnome
+cat_macintosh.html                                          Get Chris's Book
+
+                                                            General Feedback
+ GnomeDOWNLOADS                                             E-mail the Editors
+
+                                                            
+Sherlock Plugins v2.2 [600k] Mac OS 9/OSX FREE
+                                                           GNOMESPECIALS
+http://www.searchstandard.com/
+
+While doing some research for my top 50 tips, I             Manage Your
+discovered that turning off some of Sherlock's extras,     Workgroup
+like multi-language indexing, in the preferences will       Form Pilot
+speed things up considerably, particularly for local        Say the Time 5.0
+machine searches. This renewed my interest in finding       Boomer - Stream Now
+ways to add-on search capabilities to the bundled sleuth,   Create Web/CD
+resulting in my discovery of SearchStandard.com. This      catalog
+bundled collection of search plug-ins makes it possible     Easy Web Editor
+to look for almost anything using Sherlock. Their Web       Kleptomania
+site won't wow you, but SearchStandard's free plugins       Tag&Rename
+most certainly make finding things online, including        Pretty Good
+searches on your favorite Mac sites, that much easier.     Solitaire
+                                                            Visualize Color
+                                                           Combos
+ GnomeNETWORK                                               FirstStop WebSearch
+                                                            Ecobuilder
+                                                            Book Collector
+Xnet v1.0.6 [216k] OSX $48
+                                                             Get Listed Here
+http://bitcom.ch/products-xnet-e.html
+                                                           Question: which
+Dealing with servers that offer mission critical           group is 250,000+
+services, like intranet access, e-mail, or Web serving,    strong and always
+means dealing with those services failing from time to     looking for stuff to
+time. Don't be left in the dark when one of your services  make their personal
+go down, let Xnet keep you informed. The unregistered      and professional
+version of the product lets you verify http, ping, smtp,   lives run smoother?
+and ftp service availability, with many more service
+verifications included in the pro version. Xnet runs on     
+your local machine, verifying remote service availability
+and sending you a message when those services go down.     Lockergnome Webcam
+The interface allows for user-defined services, with       Image
+alert features for both an e-mail account (mine alerts      CLICK HERE TO ZOOM
+are going to my cell phone) and locally via a sound from
+your machine.                                               
+
+                                                           LOOK IT UP
+ GnomeTERMINAL
+
+                                                           [ Lockergnome  ][go]
+For OS X installs with multiple users, there may come a    [ Amazon       ][go]
+time when you need to change ownership of a particular     [ Jobs         ][go]
+file. This is particularly useful in situations where one  [ Hardware     ][go]
+user created a file, but an entirely different user is     [ Software     ][go]
+the only one who will ever make future decisions relating
+to that file, like whether to keep it or throw it in the    
+Trash. chown is the Terminal command designed to handle
+this. From the command line type:                          BYTE ME NOW
+
+sudo chown username filename
+                                                           ?2002, Lockergnome
+You'll of course want to substitute the username of the    LLC. ISSN:
+new owner for username. The name of the file receiving a   1095-3965. All
+change of ownership will replace filename.                 Rights Reserved.
+                                                           Please read our
+50 LINUX TIPS: From the mind behind the Penguin Shell      Terms of Service.
+come two more eBooks in the GnomeTome series. Whether you  Our Web site is
+are a Linux newbie or command line guru, you'll want       hosted by
+these tips as part of your information arsenal. Get your   DigitalDaze. Domain
+copy of Tony's Top 50 PenguinTWEAKS or Top 50 PenguinCORE  registered at DNS
+tips today!                                                Central.
+
+
+ GnomeFAVORITE
+
+
+Susan Kare
+
+http://www.kare.com
+
+As we move further into the future of Apple's Mac OS
+evolution, it remains important to understand where
+things evolved from. Susan Kare designed all the original
+icons for the Mac OS, way back in 1983. In fact, that
+smiling Mac that appears as OS X boots is her creation.
+Check out her collection of UI artwork, from both Windows
+and Mac operating systems. Also available from Kare.com
+are Kare designed icon apparel and collections of fonts
+as designed by Susan.
+
+
+ GnomeTIP
+
+
+Show Info gives you access to change the application
+associated with a particular file type, rename files, and
+reassign permissions. One of the best features of Show
+Info is it's ability to store "comments" related to a
+file or application. This can be a great place to store
+information on recently made changes to a file,
+information from others who've looked at a file, or in
+the case of applications, serial numbers and other
+pertinent data you may need when dealing with tech
+support.
+
+
+http://www.lockergnome.com/issues/applecore/20020709.html
+
+Your subscribed e-mail address is:
+[qqqqqqqqqq-lg@spamassassin.taint.org] - To unsubscribe
+or change your delivery address, please visit the
+subscription management page. For further information,
+please refer to the GnomeCREDITS in the sidebar.
+
+

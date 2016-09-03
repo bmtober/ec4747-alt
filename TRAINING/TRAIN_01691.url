@@ -1,0 +1,3 @@
+rpm http://ninja.no/apt 7.3/i386 irssi
+rpm-src http://ninja.no/apt 7.3/i386 irssi
+http://lists.freshrpms.net/mailman/listinfo/rpm-list

@@ -1,0 +1,5 @@
+deb http://volatile.debian.org/debian-volatile lenny/volatile main
+deb-src http://volatile.debian.org/debian-volatile lenny/volatile main
+deb http://www.debian-multimedia.org lenny main
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Archive: http://lists.debian.org/4BC3A80F.5010907@web.de

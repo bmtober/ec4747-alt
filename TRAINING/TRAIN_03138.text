@@ -1,0 +1,186 @@
+                        Lockergnome Download Our eBooks
+
+  07.10.2002 GnomeREPORT                                   LOOK OVER HERE
+
+
+WE NEED YOU TO BE AT GNOMEDEX! That's what your employer    Download Tip eBooks
+should be telling you. Microsoft Pocket PC experts will
+be sharing tips on improving workplace productivity with    Latest Windows
+portable devices. Combined with Proxim's on location       Daily
+wireless networking solutions, a Pocket PC can keep you     Latest Digital
+and your co-workers communicating no matter where you are  Media
+in the building. Learn how to bring Wi-FI and PDA           Latest Tech
+technologies together for the ultimate in portable         Specialist
+computing. Register for Gnomedex today!                     Latest Penguin
+                                                           Shell
+Reader Jack Macdonald has some advice for you would-be      Latest Apple Core
+bards in the audience:                                      Latest Web Weekly
+                                                            Latest Bits & Bytes
+"You mention Karaoke being featured at Gnomedex and you     Latest Audio Show
+might want to point out to other Gnomies that they could
+practice their Karaoke on my Red Hot Karaoke Page site.     Low Price Search
+There are the words and music for more than 1100 songs      Our Tech Conference
+available on the site and by downloading the Yamanha
+Midiplug (a link is provided) they can even change the      Microsoft Office
+key of the song to suit their voice range as well as       Tips
+speed up or slow down the music to their taste. In other    PC Productivity
+words, to have the same experience as they would have      Tips
+with professional Karaoke equipment but at no extra cost!   Cool Internet Tips
+At this price (zero) a lot of gnomies going to Gnomedex     Windows 2000 Tips
+could be singing up a storm by being properly prepared      Windows XP Tips
+for your Karaoke."
+                                                            Tell a Friend About
+Travel day on Wednesday as I head down to Ankeny, Iowa to  Us!
+help out a former co-worker and avid Gnomie with some       Suggest a Feature
+server and networking stuff. The tough part is              Advertise With Us
+remembering everything I'll need. It never fails, though.   High-Tech Job
+I always, always, always forget something. I can make      Search
+lists two weeks in advance and I'll end up 30 miles down    Chat With Gnomies
+the road with a handprint on my forehead when I come to     Watch The Webcams
+the realization that I left something important behind.     Computer Power User
+What will it be this time, I wonder? I'll let you know on
+Thursday.                                                   Read Past Issues
+                                                            Download X-Setup
+                         See You in August,                 About Lockergnome
+                                     Randy Nieland          Our Privacy Policy
+                                                            View More Options
+                                                            Our XML / RSS Feed
+ GnomeNETWORK                                               Syndicate Our Tips
+                                                            Link To Lockergnome
+                                                            Get Chris's Book
+Forwarding to Internet Address Fails
+                                                            E-mail a Suggestion
+http://support.microsoft.com/default.aspx?scid=kb;EN-US;    Your Rant / Rave
+q181636                                                     General Feedback
+                                                            The Editor's Blog
+Client inquires about the possibility of forwarding all     E-mail the Editor
+internal and Internet email to his AOL mailbox when he's
+out of the office, and I figure it's going to be a piece    
+of cake. He recently acquired a new phone through Verizon
+along with web access and a tie into his AOL mailbox,      SOUND SYSTEMS
+which was the driving force behind this request. What I
+found was that Internet email proved to be easy using a
+simple forwarding rule, but none of the internal Exchange  Yamaha RX-V1200
+email was being sent out to the Internet upon receipt,     Sony DAVC900
+even though it appeared to be included in the rule. As it  Harman Kardon AVR520
+happens, this is due to a default configuration option on  Denon AVR5803
+the Exchange 5.5 server that prevents automatic replies/   Pioneer VSXD811S
+forwards from being sent to the Internet using the         Pioneer Elite
+Exchange Internet Mail Service. A quick configuration      VSX49TX
+change and restart of IMS will put things right.           Sony HTDDW840
+                                                           Yamaha HTR5560
+                                                           BOSE LS122BK
+ GnomeSYSTEM                                               Sony DAVC450
+
+                                                            
+Stop the Presses
+                                                           GNOMESPECIALS
+http://www.wininformant.com/Articles/Index.cfm?ArticleID=
+25802
+                                                            Manage Your
+... The CD presses, that is. Microsoft has given in to     Workgroup
+the greater good and delayed Windows 2000 Service Pack 3    Form Pilot
+indefinitely. Sure, it's mildly disappointing, but I        Say the Time 5.0
+applaud the move. Instead of trying to downplay the         Boomer - Stream Now
+previously identified problems with Microsoft Installer     Create Web/CD
+(MSI) 2.0, the service pack will be put on ice until the   catalog
+issues are straightened out. Here's a quote for you...      Easy Web Editor
+Good job, Microsoft.                                        Kleptomania
+                                                            Tag&Rename
+                                                            Pretty Good
+ GnomeALERTZ                                               Solitaire
+                                                            Visualize Color
+                                                           Combos
+Today's Top 5 kbAlertz                                      FirstStop WebSearch
+                                                            Ecobuilder
+  * Q198845 - WD2000: How to Return Only File Names Using   Book Collector
+    FileSearch Property (Q198845)
+  * Q310436 - Cannot Play a DVD in Windows XP (Q310436)      Get Listed Here
+  * Q321305 - How to Log On to Windows XP If You Forget
+    Your Password or Your Password Expires (Q321305)       Question: which
+  * Q321146 - Freddi Fish 2: The Case of the Haunted       group is 250,000+
+    Schoolhouse Program Causes an Error Message in         strong and always
+    Windows XP (Q321146)                                   looking for stuff to
+  * Q321144 - Visioneer One Touch 8100 Scanner Causes an   make their personal
+    Error Message in Windows XP (Q321144)                  and professional
+                                                           lives run smoother?
+TechTV's Computer Basics CHRIS TEACHES THE BASICS: If
+you've got friends or family who want to learn more about   
+their PC, from a guy who makes things nice and easy,
+check out the VHS release of Computer Basics in the        Lockergnome Webcam
+GnomeStore. Chris teams with TechTV cohort, Kate Botello,  Image
+to lead novices on a journey through their computer. From   CLICK HERE TO ZOOM
+basic interactions, to installing apps, to using the
+Internet and e-mail, Chris and Kate have all the basics     
+covered. Help out a friend and get them a copy today.
+                                                           LOOK IT UP
+                                            Recommend It!
+
+                                                           [ Lockergnome  ][go]
+ GnomeASSISTANT                                            [ Amazon       ][go]
+                                                           [ Jobs         ][go]
+                                                           [ Hardware     ][go]
+Windows XP System File Checker                             [ Software     ][go]
+
+Dean Truax mentioned the System File Checker as a           
+possible solution to my Windows Media Player problem
+under Windows XP, and I did indeed run through it prior    BYTE ME NOW
+to attempting an in-place upgrade, obviously with no
+improvement. It's still worth a mention, however, in case
+you're not familiar with what it's there for. As you're    ?2002, Lockergnome
+probably aware, XP contains a file protection scheme that  LLC. ISSN:
+will immediate replace any system files that are deleted   1095-3965. All
+or altered in any way, ensuring that XP is kept in a       Rights Reserved.
+stable state. Sometimes this system can get a little out   Please read our
+of whack, and the SFC is meant to restore order. Note      Terms of Service.
+that any hotfixes and other Microsoft-provided updates     Our Web site is
+will be left in place since they properly update the DLL   hosted by
+Cache that is used as the sanity check to determine if a   DigitalDaze. Domain
+system file has been messed with. To access the SFC,       registered at DNS
+simply launch a command prompt and type "SFC" to display   Central.
+a list of options.
+
+
+ GnomeSTUFF
+
+
+Consider This
+Forwarded by JW
+
+http://www.computerworld.com/securitytopics/security/
+story/0,10801,72519,00.html
+
+The next time you have a face-to-face with your elected
+representatives, you might want to start asking about
+their opinions on technology laws that are being proposed
+left and right. Holding a public office seems to be
+introducing brain death more frequently considering
+proposals by Senator Fritz Hollings and now LA
+congressman Howard Berman. If Mr. Berman gets his way,
+companies may very well be allowed to hack into your
+systems without proof of provocation in order to ensure
+that you are using their software according to the stated
+rules. Mind you, if they cause colateral damage or upset
+other systems, there isn't thing one you can do in
+return. Nope, they'll have legal protection. This garbage
+is seriously getting scary. If you think it won't be
+abused, consider the case of Dimitry Skylarov when he
+publicly pointed out eBook security problems with Adobe's
+software and was promptly thrown in jail for his trouble
+under the authority of the Digital Millenium Copyright
+Act. He was eventually released, but that doesn't make it
+any more right.
+
+                                            Recommend It!
+
+
+http://www.lockergnome.com/issues/techspecialist/
+20020710.html
+
+Your subscribed e-mail address is:
+[qqqqqqqqqq-lg@spamassassin.taint.org] - To unsubscribe
+or change your delivery address, please visit the
+subscription management page. For further information,
+please refer to the GnomeCREDITS in the sidebar.
+
+

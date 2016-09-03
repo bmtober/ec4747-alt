@@ -1,0 +1,6 @@
+Debian Volatile Update Announcement VUA 63-1     http://volatile.debian.org
+http://volatile.debian.org/debian-volatile/pool/volatile/main/p/python-clamav
+ deb http://volatile.debian.org/debian-volatile lenny/volatile main
+ deb-src http://volatile.debian.org/debian-volatile lenny/volatile main
+http://www.debian.org/volatile/volatile-mirrors for the full list of
+http://www.debian.org/volatile/.

@@ -1,0 +1,11 @@
+Ign http://apt.freshrpms.net redhat/8.0/en/i386 release
+Get:1 http://apt.freshrpms.net redhat/8.0/en/i386/os pkglist [1276kB]
+Get:2 http://apt.freshrpms.net redhat/8.0/en/i386/os release [108B]
+Get:3 http://apt.freshrpms.net redhat/8.0/en/i386/updates pkglist [14B]
+Get:4 http://apt.freshrpms.net redhat/8.0/en/i386/updates release [113B]
+Get:5 http://apt.freshrpms.net redhat/8.0/en/i386/freshrpms pkglist
+Get:6 http://apt.freshrpms.net redhat/8.0/en/i386/freshrpms release
+Get:7 http://apt.freshrpms.net redhat/8.0/en/i386/os srclist [152kB]
+Get:8 http://apt.freshrpms.net redhat/8.0/en/i386/updates srclist [14B]
+Get:9 http://apt.freshrpms.net redhat/8.0/en/i386/freshrpms srclist
+http://lists.freshrpms.net/mailman/listinfo/rpm-list

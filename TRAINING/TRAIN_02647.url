@@ -1,0 +1,9 @@
+src=3D"http://www.apple.com/library/quicktime/scripts/ac_quicktime.js" =
+src=3D"http://www.apple.com/library/quicktime/scripts/qtp_library.js" =
+  	QT_WritePoster_XHTML('Play', 'http://ipsix.org/live.jpg', 		=
+'http://ipsix.org:554/live.sdp', 		'452', '388', '', 		=
+blog: http://let.de
+project : http://opencu.org
+twitter: http://twitter.com/macbroadcast/
+facebook : http://opencu.tk
+http://lists.apple.com/mailman/options/quicktime-users/mlsubscriber.tech%40csmining.org

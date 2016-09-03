@@ -1,0 +1,34 @@
+> Hit http://apt.nixia.no redhat/7.2/i386/base/pkglist.gnomehide
+> Hit http://apt.freshrpms.net redhat/7.2/i386/base/pkglist.os
+> Ign http://apt.freshrpms.net redhat/7.2/i386 release.os
+> Err http://apt.freshrpms.net redhat/7.2/i386/base/pkglist.updates
+> Hit http://apt.freshrpms.net redhat/7.2/i386 release.updates
+> Err http://apt.freshrpms.net redhat/7.2/i386/base/pkglist.freshrpms
+> Err http://apt.freshrpms.net redhat/7.2/i386 release.freshrpms
+> Hit http://apt.freshrpms.net redhat/7.2/i386/base/srclist.freshrpms
+> Ign http://apt.nixia.no redhat/7.2/i386 release.gnomehide
+> Ign http://apt.nixia.no redhat/7.2/i386/base/mirrors
+> Hit http://apt.freshrpms.net redhat/7.2/i386 release.freshrpms
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/srclist.os
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.os
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/srclist.updates
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.updates
+Get:1 http://apt.freshrpms.net redhat/7.2/en/i386/base/pkglist.os [1035kB]
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.os
+Get:2 http://apt.freshrpms.net redhat/7.2/en/i386/base/pkglist.updates
+[331kB] Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.updates
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/pkglist.freshrpms
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.freshrpms
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/srclist.os
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.os
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/srclist.updates
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.updates
+Hit http://apt.freshrpms.net redhat/7.2/en/i386/base/srclist.freshrpms
+Hit http://apt.freshrpms.net redhat/7.2/en/i386 release.freshrpms
+Ign http://apt.freshrpms.net redhat/7.2/en/$(ARCH)/base/mirrors
+Ign http://apt.freshrpms.net redhat/7.2/en/$(ARCH)/base/mirrors
+Ign http://apt.freshrpms.net redhat/7.2/en/$(ARCH)/base/mirrors
+W: http://apt.freshrpms.net/ will not be authenticated.
+W: http://apt.freshrpms.net/ will not be authenticated.
+W: http://apt.freshrpms.net/ will not be authenticated.
+http://lists.freshrpms.net/mailman/listinfo/rpm-list

@@ -1,0 +1,2 @@
+From: Gavin McCullagh <ilug_gmc@fiachra.ucd.ie>
+	send-hook .  'my_hdr From: Gavin McCullagh <gav......>"

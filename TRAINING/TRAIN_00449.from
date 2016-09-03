@@ -1,0 +1,8 @@
+	h=Message-Id:From:To:Content-Type:Content-Transfer-Encoding:Subject:
+	q=dns/txt; h=Message-Id:From:To:Content-Type:
+From: Rick Thomas <rbthomas@cs.rutgers.edu>
+Resent-From: debian-user@lists.debian.org
+	h=Message-Id:From:To:Content-Type:Content-Transfer-Encoding:Subject:
+	q=dns/txt; h=Message-Id:From:To:Content-Type:
+From: Rick Thomas <rbthomas@cs.rutgers.edu>
+Resent-From: debian-user@lists.debian.org
