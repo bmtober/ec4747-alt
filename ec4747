@@ -20,10 +20,21 @@ checkscript "body"
 
 rm *.acc
 
-for i in {0..40}
+for n in 1500 2000 2500 3000 3500 4000
 do
-  export threshold=$(bc -l <<< "$i/20")
-  rm *.csv
-  make acc
+  cat SPAMTrain.label.4327 | head -n $n | tail -n 500 > SPAMTrain.label
+  make clean
+  for i in {0..40}
+  do
+    export threshold=$(bc -l <<< "$i/20")
+    rm *.csv
+    make acc
+  done
+
+  pushd report
+  mv ../*.acc ./
+  rename ".acc" ".acc.$n" *.acc
+  popd
+
 done
 

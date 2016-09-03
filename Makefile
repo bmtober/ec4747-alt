@@ -268,16 +268,16 @@ report: graphs.txt samples.txt pairs.txt
 
 
 clean:
-	-rm rules.*
-	-rm subjects.*
-	-rm document_frequency.*
 	-rm document_similarity.*
-	-rm average_term_frequency.*
 	-rm average_term_similarity.*
 	-rm top_ten_term_similarity.*
 	-rm pairs.txt graphs.txt samples.txt
 
 clean-all: clean
+	-rm rules.*
+	-rm subjects.*
+	-rm document_frequency.*
+	-rm average_term_frequency.*
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
