@@ -11,12 +11,12 @@ txtplot(a$spamminess, a$hamminess, pch=a$class, xlab="Spamminess", ylab="Hammine
 txtplot(t$spamminess, t$hamminess, pch=t$class, xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1))
 
 png("document_similarity.png")
-plot(d$spamminess, d$hamminess, pch=d$class, col=d$color, xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Document Frequency")
+plot(d$spamminess, d$hamminess, pch=d$class, col=ifelse(d$class==1,"green", "red"), xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Document Frequency")
 
 png("average_term_frequency.png")
-plot(a$spamminess, a$hamminess, pch=a$class, col=a$color, xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Average Term Frequency")
+plot(a$spamminess, a$hamminess, pch=a$class, col=ifelse(a$class==1,"green", "red"), xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Average Term Frequency")
 
 png("top_ten_terms_frequency.png")
-plot(t$spamminess, t$hamminess, pch=t$class, col=t$color, xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Top Ten Terms Frequency")
+plot(t$spamminess, t$hamminess, pch=t$class, col=ifelse(t$class==1,"green", "red"), xlab="Spamminess", ylab="Hamminess", xlim=c(0,1), ylim=c(0,1), main="Top Ten Terms Frequency")
 
 q()
