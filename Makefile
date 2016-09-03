@@ -219,8 +219,8 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	# three columns: filename, spamminess, and hamminess.
 	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
 	$(MAKE)	$(@:%.csv=%.class)
-	printf "%s\t%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "prediction" "class" > $@
-	join -j 2 $^ | join - $(@:%.csv=%.class) | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\t%i\n", $$1, $$2, $$3, ($$3>$$2*t), $$4)}' >> $@
+	printf "%s\t%s\t%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "prediction" "class" "color" > $@
+	join -j 2 $^ | join - $(@:%.csv=%.class) | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\t%i\t%s\n", $$1, $$2, $$3, ($$3>$$2*t), $$4, $$4==1?"green":"red")}' >> $@
 
 
 %.class: 
