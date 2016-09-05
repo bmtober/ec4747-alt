@@ -1,19 +1,22 @@
 #/bin/bash
-FILES=./TRAINING/*
-for f in $FILES
-do
-if [[ "${f: -5}" == *.from ]]
-then
-  sed -i '/@/{s/.*@//}' "$f"
-  cat "$f" | tr -cd '[[:alnum:]]._-'
-  echo " $f"
-fi
+for f in $(ls TRAINING/*.from)
+do sed '/@/{s/.*@//}' "$f" | tr -cd '[[:alnum:]]._-';echo " $f"
 done >> CombineList
 
-#file='CombineList'
-#while read line
-#do
-#set word=cat | awk '{print $1;}'
-#host -4 $f1
-#getent hosts word | awk '{ print $1 }'
-#done >> IPs
+cat CombineList | while read d f 
+do
+IP=$(dig +short $d)
+printf "$f "
+printf "$IP"
+printf "\n"
+done >> NewLlist
+
+cat NewLlist | while read d f
+do
+Block=$(cat BlockListIP | grep $d)
+printf "$f "
+printf "$Block"
+printf "\n"
+done >> BlockFinal
+
+sed '/^\s*$/d' BlockFinal > TotalBlocked
