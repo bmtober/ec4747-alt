@@ -1,11 +1,11 @@
 
 # File listing ordered pairs contianing class label and document name
-#LABELS="examples.label"
-LABELS="SPAMTrain.label"
+LABELS="examples.label"
+#LABELS="SPAMTrain.label"
 
 # Directory contain message files
-#CORPUS="examples"
-CORPUS="TRAINING"
+CORPUS="examples"
+#CORPUS="TRAINING"
 
 # SPM is a list of spam email files
 # HAM is a list of ham email files
@@ -45,12 +45,12 @@ samples.txt: $(HAM) $(SPM)
 	for f in $(^:%.eml=%.term); \
 	do \
 		echo "==>> $$f <<==" >> $@; \
-		sort -nr $$f | head  -n 16  >> $@; \
+		sort -nr $$f | head  -n 40  >> $@; \
 	done
 	for f in $(^:%.eml=%.tfidf); \
 	do \
 		echo "==>> $$f <<==" >> $@; \
-		sort -nr $$f | head  -n 16  >> $@; \
+		sort -nr $$f | head  -n 40  >> $@; \
 	done
 	@echo -n "Finished '$@' target at"
 	@date
