@@ -1,0 +1,3 @@
+vcosine document_frequency.ham document_frequency.spam = 0.820234
+vcosine average_term_frequency.ham average_term_frequency.spam = 0.88274
+vcosine average_tfidf_frequency.ham average_tfidf_frequency.spam = 0.318319

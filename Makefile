@@ -16,34 +16,75 @@ HAM=$(shell awk '$$1 == 1 {printf("%s/%s ", $(CORPUS), $$2)}' $(LABELS))
 # Count of number or spam and ham documents
 ms=$(words $(SPM))
 mh=$(words $(HAM))
+mu=$(words $(HAM) $(SPM))
 
 threshold ?= 1
 
 .PRECIOUS: %.text %.body %.term %.tfidf %.csv %.class
 
-all: rules.spam rules.ham url from report
+#all: rules.spam rules.ham url from report
+all: report
+
+#report: graphs.txt samples.txt pairs.txt
+report: graphs.txt
+
+graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv average_tfidf_similarity.csv
+	# draw cluster plot
+	R --silent --vanilla < plot.R > $@
+
+
+# show some examples of documents and associated term vectors
+samples.txt: $(HAM) $(SPM)
+	-rm $@
+	for f in $^; \
+	do \
+		head -v -n 20 $$f >> $@; \
+	done
+	for f in $(^:%.eml=%.term); \
+	do \
+		echo "==>> $$f <<==" >> $@; \
+		sort -nr $$f | head  -n 16  >> $@; \
+	done
+	for f in $(^:%.eml=%.tfidf); \
+	do \
+		echo "==>> $$f <<==" >> $@; \
+		sort -nr $$f | head  -n 16  >> $@; \
+	done
+
+pairs.txt:
+	# illustrate term vector dot product and cosine similarity
+	# limit to 5 because doing all would take forever
+	# since it is O(n^2) 
+	echo "==>> dot products <<==" > $@; \
+	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
+	echo "==>> cosine similarity <<==" >> $@; \
+	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
 
 from: $(SPM:%.eml=%.from) $(HAM:%.eml=%.from) 
 
-# Extract the email subject
-%.subj: %.eml stopwords.sed
-	./ExtractSubj.py $< > $@
-
-# Extract the email body
-%.body: %.eml
-	./ExtractBody.py $< > $@
+# Hack out From
+%.from: %.eml
+	grep 'From:' $< >> $@ || :
 
 # Goes thru each file looking for a URL and pulling it out
 %.url: %.body
 	grep 'http://'  $< >  $@ || :
 	grep 'https://' $< >> $@ || :
 	
-# Hack out From
-%.from: %.eml
-	grep 'From:' $< >> $@ || :
+# Extract the email body
+%.body: %.eml
+	./ExtractBody.py $< > $@
+
+
+# this was for lab 3
+rules.spam: subjects.spam
+	python ./lab3.py subjects.spam > rules.spam
+
+rules.ham: subjects.ham
+	python ./lab3.py subjects.ham  > rules.ham
 
 
 # create spam file containing email subject lines
@@ -66,12 +107,9 @@ subjects.ham: $(HAM:%.eml=%.subj)
 		echo >> $@; \
 	done
 
-# this was for lab 3
-rules.spam: subjects.spam
-	python ./lab3.py subjects.spam > rules.spam
-
-rules.ham: subjects.ham
-	python ./lab3.py subjects.ham  > rules.ham
+# Extract the email subject
+%.subj: %.eml stopwords.sed
+	./ExtractSubj.py $< > $@
 
 #
 # term frequency statistics
@@ -79,73 +117,24 @@ rules.ham: subjects.ham
 # https://en.wikipedia.org/wiki/Tf-idf
 #
 
-# strip out html tags
-%.text: %.body
-	cat $< | w3m -T text/html -dump > $@
+acc: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc average_tfidf_similarity.acc
 
-# term frequency (term count per document)
-%.term: %.text
-	cat $< | tr '[:punct:]' ' ' | perl -0777 -lape 's/\s+/\n/g' | sort | uniq -c | sort -k2 > $@
+%.acc: %.csv
+	# compute performance 
+	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, (m00+m11)/NR, t)}' >> $@
 
-# document frequency (number of documents a term appears in)
-document_frequency.spam: $(SPM:%.eml=%.term)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-  	vunit $$f > .vunit.s; \
-		vsum .vunit.s $@  > .$@; \
-		mv .$@ $@; \
-	done
+%.csv: %.spam %.ham
+	# Since spam is listed first above, the joined file below will 
+	# three columns: filename, spamminess, and hamminess.
+	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
+	-rm $(@:%.csv=%.class)
+	$(MAKE)	$(@:%.csv=%.class)
+	printf "%s\t%s\t%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "prediction" "class" "color" > $@
+	join -j 2 $^ | join - $(@:%.csv=%.class) | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\t%i\t%s\n", $$1, $$2, $$3, ($$3>$$2*t), $$4, $$4==1?"green":"red")}' >> $@
 
-document_frequency.ham: $(HAM:%.eml=%.term)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-		vunit $$f > .vunit.h; \
-		vsum .vunit.h $@  > .$@; \
-		mv .$@ $@; \
-	done
-
-
-# term-frequency/inverse-document frequency
-%.tfidf.spam: %.term document_frequency.spam
-	@echo "tf-idf spam document count $(ms) $<"
-	vtfidf $(ms) $< document_frequency.spam > $@
-
-%.tfidf.ham: %.term document_frequency.ham
-	@echo "tf-idf ham document count $(mh) $<"
-	vtfidf $(mh) $< document_frequency.ham  > $@
-
-%.tfidf: %.tfidf.ham
-%.tfidf: %.tfidf.spam
-	mv $< $@
-
-# average term frequency
-average_term_frequency.spam: $(SPM:%.eml=%.term)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-		vsum $$f $@  > .$@; \
-		mv .$@ $@; \
-	done
-	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
-	mv .$@ $@
-
-average_term_frequency.ham: $(HAM:%.eml=%.term)
-	-rm $@
-	touch $@
-	for f in $^; \
-	do \
-		vsum $$f $@  > .$@; \
-		mv .$@ $@; \
-	done
-	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
-	sort -k2 .$@ > $@
-	mv .$@ $@
-
+%.class: 
+	cat $(LABELS) | sed -e 's/\.eml/\.tfidf/'| awk '{printf("%s/%s\t%d\n", $(CORPUS), $$2, $$1)}' > $@
+	
 
 # cosine similarity for spam documents
 document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -191,6 +180,27 @@ average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	done
 	sort -k2 .$@ > $@
 
+# cosine similarity for ham documents
+average_tfidf_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
+	-rm .$@
+	touch .$@
+	$(MAKE) average_tfidf_frequency.ham
+	for f in $^; \
+	do \
+		printf "%f\t%s\n" $$(vcosine $$f average_tfidf_frequency.ham) $(basename $$f) >> .$@; \
+	done
+	sort -k2 .$@ > $@
+
+average_tfidf_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
+	-rm .$@
+	touch .$@
+	$(MAKE) average_tfidf_frequency.spam
+	for f in $^; \
+	do \
+		printf "%f\t%s\n" $$(vcosine $$f average_tfidf_frequency.spam) $(basename $$f) >> .$@; \
+	done
+	sort -k2 .$@ > $@
+    
 top_ten_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
 	touch .$@
@@ -214,70 +224,112 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	done
 	sort -k2 .$@ > $@
 
-%.csv: %.spam %.ham
-	# Since spam is listed first above, the joined file below will 
-	# three columns: filename, spamminess, and hamminess.
-	# The output of awk is: filename, hamminess, spamminess, (h/s)>t ?
-	$(MAKE)	$(@:%.csv=%.class)
-	printf "%s\t%s\t%s\t%s\t%s\t%s\n" "document" "spamminess" "hamminess" "prediction" "class" "color" > $@
-	join -j 2 $^ | join - $(@:%.csv=%.class) | awk -v t=$(threshold) '{printf("%s\t%f\t%f\t%i\t%i\t%s\n", $$1, $$2, $$3, ($$3>$$2*t), $$4, $$4==1?"green":"red")}' >> $@
-
-
-%.class: 
-	cat $(LABELS) | sed -e 's/\.eml/\.tfidf/'| awk '{printf("%s/%s\t%d\n", $(CORPUS), $$2, $$1)}' > $@
-	
-graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv
-	# draw cluster plot
-	R --silent --vanilla < plot.R > $@
-
-%.acc: %.csv
-	# compute performance 
-	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, (m00+m11)/NR, t)}' >> $@
-
-acc: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc
-
-# show some examples of documents and associated term vectors
-samples.txt: $(HAM) $(SPM)
+# document frequency (number of documents a term appears in)
+document_frequency.spam: $(SPM:%.eml=%.term)
 	-rm $@
+	touch $@
 	for f in $^; \
 	do \
-		head -v -n 20 $$f >> $@; \
+  	vunit $$f > .vunit.s; \
+		vsum .vunit.s $@  > .$@; \
+		mv .$@ $@; \
 	done
-	for f in $(^:%.eml=%.term); \
+
+document_frequency.ham: $(HAM:%.eml=%.term)
+	-rm $@
+	touch $@
+	for f in $^; \
 	do \
-		echo "==>> $$f <<==" >> $@; \
-		sort -nr $$f | head  -n 16  >> $@; \
+		vunit $$f > .vunit.h; \
+		vsum .vunit.h $@  > .$@; \
+		mv .$@ $@; \
 	done
-	for f in $(^:%.eml=%.tfidf); \
+
+
+# average term frequency
+average_term_frequency.spam: $(SPM:%.eml=%.term)
+	-rm $@
+	touch $@
+	for f in $^; \
 	do \
-		echo "==>> $$f <<==" >> $@; \
-		sort -nr $$f | head  -n 16  >> $@; \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
 	done
+	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
+	mv .$@ $@
 
-pairs.txt:
-	# illustrate term vector dot product and cosine similarity
-	# limit to 5 because doing all would take forever
-	# since it is O(n^2) 
-	echo "==>> dot products <<==" > $@; \
-	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
-	echo "==>> cosine similarity <<==" >> $@; \
-	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
+average_term_frequency.ham: $(HAM:%.eml=%.term)
+	-rm $@
+	touch $@
+	for f in $^; \
+	do \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
+	done
+	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
+	sort -k2 .$@ > $@
+	mv .$@ $@
+
+# average tfidf frequency
+average_tfidf_frequency.spam: $(SPM:%.eml=%.tfidf)
+	-rm $@
+	touch $@
+	for f in $^; \
+	do \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
+	done
+	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
+	mv .$@ $@
+
+average_tfidf_frequency.ham: $(HAM:%.eml=%.tfidf)
+	-rm $@
+	touch $@
+	for f in $^; \
+	do \
+		vsum $$f $@  > .$@; \
+		mv .$@ $@; \
+	done
+	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
+	sort -k2 .$@ > $@
+	mv .$@ $@
 
 
-report: graphs.txt samples.txt pairs.txt
+# term-frequency/inverse-document frequency
+%.tfidf: %.term document_frequency.uber
+	@echo "tf-idf spam document count $(mu) $<"
+	vtfidf $(mu) $< document_frequency.uber > $@
+
+document_frequency.uber: document_frequency.spam document_frequency.ham 
+	vsum $^  > .$@; \
+	vscale $(shell bc -l <<< "1./$(mu)") .$@ | sort -k2 .$@ > $@
+
+
+# strip out html tags
+%.text: %.body
+	cat $< | w3m -T text/html -dump > $@
+
+# term frequency (term count per document)
+%.term: %.text
+	cat $< | tr '[:punct:]' ' ' | perl -0777 -lape 's/\s+/\n/g' | sort | uniq -c | sort -k2 > $@
 
 
 clean:
 	-rm document_similarity.*
-	-rm average_term_similarity.*
 	-rm top_ten_term_similarity.*
+	-rm average_term_similarity.*
+	-rm average_tfidf_similarity.*
 	-rm pairs.txt graphs.txt samples.txt
 
-clean-all: clean
+clean-freq: clean
+	-rm document_frequency.*
+	-rm top_ten_term_frequency.*
+	-rm average_term_frequency.*
+	-rm average_tfidf_frequency.*
+
+clean-all: clean-freq
 	-rm rules.*
 	-rm subjects.*
-	-rm document_frequency.*
-	-rm average_term_frequency.*
 	-rm $(SPM:%.eml=%.url)  $(HAM:%.eml=%.url)
 	-rm $(SPM:%.eml=%.term) $(HAM:%.eml=%.term)
 	-rm $(SPM:%.eml=%.text) $(HAM:%.eml=%.text)
