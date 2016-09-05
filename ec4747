@@ -20,6 +20,24 @@ checkscript "body"
 
 rm *.acc
 
+cat SPAMTrain.label.4327 | head -n 500 > SPAMTrain.label
+make clean-freq
+make
+
+d=document_frequency
+a=average_term_frequency
+f=average_tfidf_frequency
+
+for x in $d $a $f
+do
+  echo -n "vcosine $x.ham $x.spam = "
+  vcosine $x.ham $x.spam
+done > exemplars.txt
+
+
+outputdir="report-new"
+mkdir "${outputdir}"
+
 for n in 1500 2000 2500 3000 3500 4000
 do
   cat SPAMTrain.label.4327 | head -n $n | tail -n 500 > SPAMTrain.label
@@ -31,8 +49,8 @@ do
     make acc
   done
 
-  pushd report
-  mv ../*.acc ./
+  pushd "${outputdir}"
+  mv $OLDPWD/*.acc ./
   rename ".acc" ".acc.$n" *.acc
   popd
 
