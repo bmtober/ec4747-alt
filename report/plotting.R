@@ -1,4 +1,15 @@
+png("uniqwords.png")
 x<-read.csv("report/uniqwords.csv",header=T)
-png()
 h=hist(x$word.count, main="Unique Words Per Document", xlab="Number of Unique Words", breaks=100)
+dev.off()
+ 
+png("uniqwords-boxplot.png")
+x<-read.csv("report/uniqwords.csv",header=T)
+b=boxplot(x$word.count, main="Unique Words Per Document", xlab="Number of Unique Words", breaks=100)
+dev.off()
+ 
+png("uniq-lessoutliers.png")
+x<-read.csv("report/uniqwords-lessoutliers.csv",header=T)
+h=hist(x$word.count, main="Unique Words Less Outliers Per Document", xlab="Number of Unique Words", breaks=100)
+dev.off()
 q()

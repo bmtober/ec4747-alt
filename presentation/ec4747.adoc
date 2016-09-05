@@ -7,6 +7,17 @@
 
 == Data
 
+image::../report/uniqwords.png[]
+
+== Data
+
+image::../report/uniqwords-boxplot.png[]
+
+== Data
+
+image::../report/uniq-lessoutliers.png[]
+
+
 == Math
 
 == Four Contrived Sample Documents
