@@ -22,15 +22,17 @@ threshold ?= 1
 
 .PRECIOUS: %.text %.body %.term %.tfidf %.csv %.class
 
-#all: rules.spam rules.ham url from report
-all: report
+all: rules.spam rules.ham url from report
 
-#report: graphs.txt samples.txt pairs.txt
-report: graphs.txt
+report: graphs.txt samples.txt pairs.txt
+	@echo -n "Finished '$@' target at"
+	@date
 
 graphs.txt: document_similarity.csv average_term_similarity.csv top_ten_term_similarity.csv average_tfidf_similarity.csv
 	# draw cluster plot
 	R --silent --vanilla < plot.R > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 # show some examples of documents and associated term vectors
@@ -50,6 +52,8 @@ samples.txt: $(HAM) $(SPM)
 		echo "==>> $$f <<==" >> $@; \
 		sort -nr $$f | head  -n 16  >> $@; \
 	done
+	@echo -n "Finished '$@' target at"
+	@date
 
 pairs.txt:
 	# illustrate term vector dot product and cosine similarity
@@ -59,11 +63,17 @@ pairs.txt:
 	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vdot $$a $$b = ";vdot $$a $$b;done >> $@
 	echo "==>> cosine similarity <<==" >> $@; \
 	ls $(CORPUS)/*.term | head -n 5 | pairs | while read a b;do echo -n "vcosine $$a $$b = ";vcosine $$a $$b;done >> $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 url: $(SPM:%.eml=%.url) $(HAM:%.eml=%.url) 
+	@echo -n "Finished '$@' target at"
+	@date
 
 from: $(SPM:%.eml=%.from) $(HAM:%.eml=%.from) 
+	@echo -n "Finished '$@' target at"
+	@date
 
 # Hack out From
 %.from: %.eml
@@ -96,6 +106,8 @@ subjects.spam: $(SPM:%.eml=%.subj)
 		cat $$f | tr '[:cntrl:]' ' ' | sed -f stopwords.sed  >> $@; \
 		echo >> $@; \
 	done
+	@echo -n "Finished '$@' target at"
+	@date
 
 # create ham file containing email subject lines
 subjects.ham: $(HAM:%.eml=%.subj)
@@ -106,6 +118,8 @@ subjects.ham: $(HAM:%.eml=%.subj)
 		cat $$f | tr '[:cntrl:]' ' ' | sed -f stopwords.sed  >> $@; \
 		echo >> $@; \
 	done
+	@echo -n "Finished '$@' target at"
+	@date
 
 # Extract the email subject
 %.subj: %.eml stopwords.sed
@@ -118,6 +132,8 @@ subjects.ham: $(HAM:%.eml=%.subj)
 #
 
 acc: document_similarity.acc average_term_similarity.acc top_ten_term_similarity.acc average_tfidf_similarity.acc
+	@echo -n "Finished '$@' target at"
+	@date
 
 %.acc: %.csv
 	# compute performance 
@@ -146,6 +162,8 @@ document_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.spam) $(basename $(notdir $$f)) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
     
 # cosine similarity for ham documents
 document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -157,6 +175,8 @@ document_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f document_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -168,6 +188,8 @@ average_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.spam) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
     
 # cosine similarity for ham documents
 average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -179,6 +201,8 @@ average_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f average_term_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 # cosine similarity for ham documents
 average_tfidf_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -190,6 +214,8 @@ average_tfidf_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f average_tfidf_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 average_tfidf_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
@@ -200,6 +226,8 @@ average_tfidf_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine $$f average_tfidf_frequency.spam) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
     
 top_ten_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 	-rm .$@
@@ -211,6 +239,8 @@ top_ten_term_similarity.spam: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.spam) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
     
 # cosine similarity for ham documents
 top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
@@ -223,6 +253,8 @@ top_ten_term_similarity.ham: $(SPM:%.eml=%.tfidf) $(HAM:%.eml=%.tfidf)
 		printf "%f\t%s\n" $$(vcosine .top_ten.tfidf average_term_frequency.ham) $(basename $$f) >> .$@; \
 	done
 	sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 # document frequency (number of documents a term appears in)
 document_frequency.spam: $(SPM:%.eml=%.term)
@@ -234,6 +266,8 @@ document_frequency.spam: $(SPM:%.eml=%.term)
 		vsum .vunit.s $@  > .$@; \
 		mv .$@ $@; \
 	done
+	@echo -n "Finished '$@' target at"
+	@date
 
 document_frequency.ham: $(HAM:%.eml=%.term)
 	-rm $@
@@ -244,6 +278,8 @@ document_frequency.ham: $(HAM:%.eml=%.term)
 		vsum .vunit.h $@  > .$@; \
 		mv .$@ $@; \
 	done
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 # average term frequency
@@ -257,6 +293,8 @@ average_term_frequency.spam: $(SPM:%.eml=%.term)
 	done
 	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
 	mv .$@ $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 average_term_frequency.ham: $(HAM:%.eml=%.term)
 	-rm $@
@@ -267,8 +305,9 @@ average_term_frequency.ham: $(HAM:%.eml=%.term)
 		mv .$@ $@; \
 	done
 	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
-	sort -k2 .$@ > $@
 	mv .$@ $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 # average tfidf frequency
 average_tfidf_frequency.spam: $(SPM:%.eml=%.tfidf)
@@ -281,6 +320,8 @@ average_tfidf_frequency.spam: $(SPM:%.eml=%.tfidf)
 	done
 	vscale $(shell bc -l <<< "1./$(ms)") $@ > .$@
 	mv .$@ $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 average_tfidf_frequency.ham: $(HAM:%.eml=%.tfidf)
 	-rm $@
@@ -291,8 +332,9 @@ average_tfidf_frequency.ham: $(HAM:%.eml=%.tfidf)
 		mv .$@ $@; \
 	done
 	vscale $(shell bc -l <<< "1./$(mh)") $@ > .$@ 
-	sort -k2 .$@ > $@
 	mv .$@ $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 # term-frequency/inverse-document frequency
@@ -303,6 +345,8 @@ average_tfidf_frequency.ham: $(HAM:%.eml=%.tfidf)
 document_frequency.uber: document_frequency.spam document_frequency.ham 
 	vsum $^  > .$@; \
 	vscale $(shell bc -l <<< "1./$(mu)") .$@ | sort -k2 .$@ > $@
+	@echo -n "Finished '$@' target at"
+	@date
 
 
 # strip out html tags
