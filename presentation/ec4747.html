@@ -4813,46 +4813,6 @@ else
 </div>
 </div>
 <div class="sect1 slide">
-<h1 id="_math">Math</h1>
-<div class="sectionbody" style="max-width:80">
-<div class="paragraph"><p>Accuracy is defined as</p></div>
-<div class="paragraph"><p>$ A = (m_00 + m_11)/(m_00 + m_01 + m_10 + m_11) $</p></div>
-<div class="paragraph"><p>where</p></div>
-<div class="paragraph"><p>$m_00$ is the number of messages actually spam and identified as spam (i.e, correct)</p></div>
-<div class="paragraph"><p>$m_01$ is the number of messages actually spam but identified as ham of (i.e., error)</p></div>
-<div class="paragraph"><p>$m_10$ is the number of messages actually ham but identified as spam (i.e., error)</p></div>
-<div class="paragraph"><p>$m_11$ is the number of messages actually ham and identified as ham (i.e., correct)</p></div>
-</div>
-</div>
-<div class="sect1 slide">
-<h1 id="_math_2">Math</h1>
-<div class="sectionbody" style="max-width:80">
-<div class="paragraph"><p>Cosine similarity is defined as the normalized dot product</p></div>
-<div class="paragraph"><p>$ cos(x,y) = (x*y)/(| x || y |)  $</p></div>
-<div class="paragraph"><p>between vectors $x$ and $y$.</p></div>
-</div>
-</div>
-<div class="sect1 slide">
-<h1 id="_math_3">Math</h1>
-<div class="sectionbody" style="max-width:80">
-<div class="paragraph"><p>$ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $</p></div>
-<div class="paragraph"><p>where</p></div>
-<div class="paragraph"><p>$tf(t,d)$ is the number of times term $t$ occurs in document $d$</p></div>
-<div class="paragraph"><p>$df(t,D)$ is the number of documents term $t$ occurs in across the entire corpus $D$</p></div>
-<div class="paragraph"><p>$M$ is the number of documents.</p></div>
-</div>
-</div>
-<div class="sect1 slide">
-<h1 id="_math_4">Math</h1>
-<div class="sectionbody" style="max-width:80">
-</div>
-</div>
-<div class="sect1 slide">
-<h1 id="_math_5">Math</h1>
-<div class="sectionbody" style="max-width:80">
-</div>
-</div>
-<div class="sect1 slide">
 <h1 id="_four_contrived_sample_documents">Four Contrived Sample Documents</h1>
 <div class="sectionbody" style="max-width:80">
 <div class="literalblock">
@@ -4936,6 +4896,90 @@ From: noone@example.com
 Subject: A word about Spam
 
 Spam</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_term_vectors">Term Vectors</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="listingblock">
+<div class="content">
+<pre><code>==&gt;&gt; examples/poem.term &lt;&lt;==
+      3 and
+      2 the
+      2 fox
+      2 dog
+      2 brown
+      2 The
+      1 white
+      1 up
+      1 sleeping
+      1 said
+      1 over
+      1 nimble
+      1 looked
+      1 jumped
+      1 black
+      1 awoke
+      1 at
+      1 Woof</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_term_vectors_2">Term Vectors</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="literalblock">
+<div class="content">
+<pre><code>==&gt;&gt; examples/song.term &lt;&lt;==
+      5 ding
+      2 da
+      1 the
+      1 say
+      1 fox
+      1 does
+      1 What
+      1 Ding</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_term_frequency_inverse_document_frequency">Term-Frequency/Inverse Document Frequency</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $</p></div>
+<div class="paragraph"><p>where</p></div>
+<div class="paragraph"><p>$tf(t,d)$ is the number of times term $t$ occurs in document $d$</p></div>
+<div class="paragraph"><p>$df(t,D)$ is the number of documents term $t$ occurs in across the entire corpus $D$</p></div>
+<div class="paragraph"><p>$M$ is the number of documents.</p></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_document_frequency">Document Frequency</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="literalblock">
+<div class="content">
+<pre><code>==&gt; examples/document_frequency &lt;==
+3 the
+2 up
+2 fox
+2 and
+2 What
+2 Spam
+1 your
+1 you
+1 words
+1 without
+1 with
+1 white
+1 what
+1 want
+1 ve
+1 truffle
+1 top
+1 too
+1 tomato
+1 through
+   ...</code></pre>
 </div></div>
 </div>
 </div>
@@ -5178,6 +5222,68 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1 slide">
+<h1 id="_cosine_similarity">Cosine Similarity</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$ cos(x,y) = (x*y)/(| x || y |)  $</p></div>
+<div class="paragraph"><p>between vectors $x$ and $y$.</p></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_document_similarity">Document Similarity</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$ s_h = cos(v_(tfidf), e_h) = $ "hamminess"</p></div>
+<div class="paragraph"><p>$ s_s = cos(v_(tfidf), e_s) = $ "spamminess"</p></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_threshold">Threshold</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$  s_h/s_s &gt;= t rArr $ "ham"</p></div>
+<div class="paragraph"><p>where</p></div>
+<div class="paragraph"><p>$ s_h = cos(v_(tfidf), e_h) = $ "hamminess"</p></div>
+<div class="paragraph"><p>$ s_s = cos(v_(tfidf), e_s) = $ "spamminess"</p></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_scenarios">Scenarios</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="dlist"><dl class="">
+<dt class="hdlist1">
+Document Frequency
+</dt>
+<dd>
+<p>
+tf-idf vectors compared to the document frequency vector
+</p>
+</dd>
+<dt class="hdlist1">
+Average Term Frequency
+</dt>
+<dd>
+<p>
+tf-idf vectors compared average of term vectors
+</p>
+</dd>
+<dt class="hdlist1">
+Top-10
+</dt>
+<dd>
+<p>
+tf-idf vectors truncated to the top-ten scoring words in the document
+</p>
+</dd>
+<dt class="hdlist1">
+Average TF-IDF
+</dt>
+<dd>
+<p>
+tf-idf vectors compared to the average of tf-idf vectors
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1 slide">
 <h1 id="_discriminating_between_ham_and_spam">Discriminating Between Ham and Spam</h1>
 <div class="sectionbody" style="max-width:80">
 <div class="tableblock">
@@ -5203,12 +5309,12 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><div><div class="imageblock">
 <div class="content">
-<img src="average_tfidf_frequency_example.png" alt="average_tfidf_frequency_example.png" />
+<img src="top_ten_term_frequency_example.png" alt="top_ten_term_frequency_example.png" />
 </div>
 </div></div></td>
 <td align="left" valign="top"><div><div class="imageblock">
 <div class="content">
-<img src="top_ten_term_frequency_example.png" alt="top_ten_term_frequency_example.png" />
+<img src="average_tfidf_frequency_example.png" alt="average_tfidf_frequency_example.png" />
 </div>
 </div></div></td>
 </tr>
@@ -5259,6 +5365,17 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="sect1 slide">
 <h1 id="_accuracy">Accuracy</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$ A = (m_00 + m_11)/(m_00 + m_01 + m_10 + m_11) $</p></div>
+<div class="paragraph"><p>where</p></div>
+<div class="paragraph"><p>$m_00$ is the number of messages actually spam and identified as spam (i.e, correct)</p></div>
+<div class="paragraph"><p>$m_01$ is the number of messages actually spam but identified as ham of (i.e., error)</p></div>
+<div class="paragraph"><p>$m_10$ is the number of messages actually ham but identified as spam (i.e., error)</p></div>
+<div class="paragraph"><p>$m_11$ is the number of messages actually ham and identified as ham (i.e., correct)</p></div>
+</div>
+</div>
+<div class="sect1 slide">
+<h1 id="_accuracy_2">Accuracy</h1>
 <div class="sectionbody" style="max-width:80">
 <div class="imageblock">
 <div class="content">

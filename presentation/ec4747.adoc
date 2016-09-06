@@ -19,48 +19,6 @@ image::../report/uniqwords-boxplot.png[]
 image::../report/uniq-lessoutliers.png[]
 
 
-== Math
-
-Accuracy is defined as 
-
-$ A = (m_00 + m_11)/(m_00 + m_01 + m_10 + m_11) $
-
-where 
-
-$m_00$ is the number of messages actually spam and identified as spam (i.e, correct) 
-
-$m_01$ is the number of messages actually spam but identified as ham of (i.e., error)
-
-$m_10$ is the number of messages actually ham but identified as spam (i.e., error)
-
-$m_11$ is the number of messages actually ham and identified as ham (i.e., correct)
-
-== Math
-
-Cosine similarity is defined as the normalized dot product
-
-$ cos(x,y) = (x*y)/(| x || y |)  $
-
-between vectors $x$ and $y$.
-
-
-== Math
-
-$ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $
-
-where 
-
-$tf(t,d)$ is the number of times term $t$ occurs in document $d$
-
-$df(t,D)$ is the number of documents term $t$ occurs in across the entire corpus $D$
-  
-$M$ is the number of documents.
-
-== Math
-
-
-== Math
-
   
 == Four Contrived Sample Documents
 ..........................
@@ -135,6 +93,79 @@ Spam
 
 ..........................
 
+== Term Vectors
+--------------------------
+==>> examples/poem.term <<==
+      3 and
+      2 the
+      2 fox
+      2 dog
+      2 brown
+      2 The
+      1 white
+      1 up
+      1 sleeping
+      1 said
+      1 over
+      1 nimble
+      1 looked
+      1 jumped
+      1 black
+      1 awoke
+      1 at
+      1 Woof
+--------------------------
+
+== Term Vectors
+..........................
+==>> examples/song.term <<==
+      5 ding
+      2 da
+      1 the
+      1 say
+      1 fox
+      1 does
+      1 What
+      1 Ding
+..........................
+
+== Term-Frequency/Inverse Document Frequency
+
+$ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $
+
+where 
+
+$tf(t,d)$ is the number of times term $t$ occurs in document $d$
+
+$df(t,D)$ is the number of documents term $t$ occurs in across the entire corpus $D$
+  
+$M$ is the number of documents.
+
+== Document Frequency
+..........................
+==> examples/document_frequency <==
+3 the
+2 up
+2 fox
+2 and
+2 What
+2 Spam
+1 your
+1 you
+1 words
+1 without
+1 with
+1 white
+1 what
+1 want
+1 ve
+1 truffle
+1 top
+1 too
+1 tomato
+1 through
+   ...
+..........................
 
 == Term Vectors vs. TF-IDF Vectors
 [cols="asciidoc,asciidoc"]
@@ -328,6 +359,41 @@ Spam
 ..........................
 |=====================
 
+== Cosine Similarity
+
+$ cos(x,y) = (x*y)/(| x || y |)  $
+
+between vectors $x$ and $y$.
+
+
+== Document Similarity
+
+$ s_h = cos(v_(tfidf), e_h) = $ "hamminess"
+
+$ s_s = cos(v_(tfidf), e_s) = $ "spamminess"
+
+== Threshold
+
+$  s_h/s_s >= t rArr $ "ham"
+
+where
+
+$ s_h = cos(v_(tfidf), e_h) = $ "hamminess"
+
+$ s_s = cos(v_(tfidf), e_s) = $ "spamminess"
+
+
+== Scenarios
+
+Document Frequency:: tf-idf vectors compared to the document frequency vector
+
+Average Term Frequency:: tf-idf vectors compared average of term vectors
+
+Top-10:: tf-idf vectors truncated to the top-ten scoring words in the document
+
+Average TF-IDF:: tf-idf vectors compared to the average of tf-idf vectors
+
+
 == Discriminating Between Ham and Spam
 
 [cols="asciidoc,asciidoc"]
@@ -339,10 +405,10 @@ image::document_similarity_example.png[]
 image::average_term_frequency_example.png[]
 
 |
-image::average_tfidf_frequency_example.png[]
+image::top_ten_term_frequency_example.png[]
 
 .1+|
-image::top_ten_term_frequency_example.png[]
+image::average_tfidf_frequency_example.png[]
 |=====================
 
 == Results
@@ -362,6 +428,20 @@ image::../report/average_tfidf_frequency.png[]
 image::../report/top_ten_term_frequency.png[]
 |=====================
 
+
+== Accuracy
+
+$ A = (m_00 + m_11)/(m_00 + m_01 + m_10 + m_11) $
+
+where 
+
+$m_00$ is the number of messages actually spam and identified as spam (i.e, correct) 
+
+$m_01$ is the number of messages actually spam but identified as ham of (i.e., error)
+
+$m_10$ is the number of messages actually ham but identified as spam (i.e., error)
+
+$m_11$ is the number of messages actually ham and identified as ham (i.e., correct)
 
 
 == Accuracy
