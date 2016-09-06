@@ -1,6 +1,7 @@
 = EC4747 Class Presentation on EMail Classification
 :author:  Berend Tober and Matt Buhler
 :backend: slidy
+:asciimath:
 :max-width: 80
 
 == Introduction
@@ -20,6 +21,47 @@ image::../report/uniq-lessoutliers.png[]
 
 == Math
 
+Accuracy is defined as 
+
+$ A = (m_00 + m_11)/(m_00 + m_01 + m_10 + m_11) $
+
+where 
+
+$m_00$ is the number of messages actually spam and identified as spam (i.e, correct) 
+
+$m_01$ is the number of messages actually spam but identified as ham of (i.e., error)
+
+$m_10$ is the number of messages actually ham but identified as spam (i.e., error)
+
+$m_11$ is the number of messages actually ham and identified as ham (i.e., correct)
+
+== Math
+
+Cosine similarity is defined as the normalized dot product
+
+$ cos(x,y) = (x*y)/(| x || y |)  $
+
+between vectors $x$ and $y$.
+
+
+== Math
+
+$ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $
+
+where 
+
+$tf(t,d)$ is the number of times term $t$ occurs in document $d$
+
+$df(t,D)$ is the number of documents term $t$ occurs in across the entire corpus $D$
+  
+$M$ is the number of documents.
+
+== Math
+
+
+== Math
+
+  
 == Four Contrived Sample Documents
 ..........................
 ==> examples/poem.eml <==
