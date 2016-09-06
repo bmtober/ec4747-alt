@@ -1,0 +1,5 @@
+png("class_count.png")
+x<-read.csv("../SPAMTrain.label.4327",header=F, sep=' ')
+h=hist(x$V1, main="E-Mail Corpus Class Counts")
+#dev.off()
+#q()
