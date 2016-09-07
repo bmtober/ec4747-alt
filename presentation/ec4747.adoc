@@ -175,7 +175,7 @@ $M$ is the number of documents.
 [cols="asciidoc,asciidoc"]
 |=====================
 |
---------------------------
+..........................
 ==>> examples/poem.term <<==
       3 and
       2 the
@@ -195,10 +195,10 @@ $M$ is the number of documents.
       1 awoke
       1 at
       1 Woof
---------------------------
+..........................
 
 .1+|
---------------------------
+..........................
 ==>> examples/poem.tfidf <<==
 2.772589 dog
 2.772589 brown
@@ -218,8 +218,7 @@ $M$ is the number of documents.
 1.386294 Woof
 0.693147 up
 0.575364 the
---------------------------
-
+..........................
 |=====================
 
 == Term Vectors vs. TF-IDF Vectors
