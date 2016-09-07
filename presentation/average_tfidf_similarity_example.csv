@@ -1,0 +1,5 @@
+document	spamminess	hamminess	prediction	class	color
+examples/poem.tfidf	0.029125	0.679197	1	1	green
+examples/skit.tfidf	0.999990	0.019944	0	0	red
+examples/song.tfidf	0.000795	0.747321	1	1	green
+examples/spam.tfidf	0.038992	0.000000	0	0	red
