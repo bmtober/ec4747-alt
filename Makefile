@@ -1,11 +1,11 @@
 
 # File listing ordered pairs contianing class label and document name
-LABELS="examples.label"
-#LABELS="SPAMTrain.label"
+#LABELS?="examples.label"
+LABELS?="SPAMTrain.label"
 
 # Directory contain message files
-CORPUS="examples"
-#CORPUS="TRAINING"
+#CORPUS?="examples"
+CORPUS?="TRAINING"
 
 # SPM is a list of spam email files
 # HAM is a list of ham email files
