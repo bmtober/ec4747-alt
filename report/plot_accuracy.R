@@ -31,8 +31,8 @@ a4000 <- read.table("average_term_similarity.acc.4000", header=FALSE, sep=" ")
 f4000 <- read.table("average_tfidf_similarity.acc.4000", header=FALSE, sep=" ")
 t4000 <- read.table("top_ten_term_similarity.acc.4000", header=FALSE, sep=" ")
 
-png("accuracy.png")
-plot(d1500$V7,d1500$V6, type="l", ylim=c(0,1), xlab="Threshold", ylab="Accuracy", main="Accuracy", col="blue")
+png("accuracy.png", width=400, height=400)
+plot(d1500$V7,d1500$V6, type="l", cex.lab=1.5, cex.main=2, ylim=c(0,1), xlab="Threshold", ylab="Accuracy", main="Accuracy", col="blue")
 
 lines(d2000$V7,d2000$V6, col="blue")
 lines(d2500$V7,d2500$V6, col="blue")
@@ -62,4 +62,5 @@ lines(f3500$V7,f3500$V6, col="yellow")
 lines(f4000$V7,f4000$V6, col="yellow")
 
 legend(0.2,0.4, c("Document Freqency", "Average Term Frequency", "Top Ten Terms", "Average TFIDF"), col=c("blue", "green", "red", "yellow"), pch=c(0,0,0))
+dev.off()
 q()
