@@ -415,6 +415,26 @@ image::top_ten_term_frequency_example.png[]
 image::average_tfidf_frequency_example.png[]
 |=====================
 
+
+== Accuracy
+
+$ A(t) = (m_(00)(t) + m_(11)(t))/(m_(00)(t) + m_(01)(t) + m_(10)(t) + m_(11)(t)) $
+
+where 
+
+$m_(00)(t)$ is the number of messages actually spam and identified as spam (i.e, correct) 
+
+$m_(01)(t)$ is the number of messages actually spam but identified as ham of (i.e., error)
+
+$m_(10)(t)$ is the number of messages actually ham but identified as spam (i.e., error)
+
+$m_(11)(t)$ is the number of messages actually ham and identified as ham (i.e., correct)
+
+
+== Accuracy
+image::accuracy-example.png[]
+
+
 == Results
 
 [cols="asciidoc,asciidoc"]
@@ -431,21 +451,6 @@ image::../report/average_tfidf_frequency.png[]
 .1+|
 image::../report/top_ten_term_frequency.png[]
 |=====================
-
-
-== Accuracy
-
-$ A(t) = (m_(00)(t) + m_(11)(t))/(m_(00)(t) + m_(01)(t) + m_(10)(t) + m_(11)(t)) $
-
-where 
-
-$m_(00)(t)$ is the number of messages actually spam and identified as spam (i.e, correct) 
-
-$m_(01)(t)$ is the number of messages actually spam but identified as ham of (i.e., error)
-
-$m_(10)(t)$ is the number of messages actually ham but identified as spam (i.e., error)
-
-$m_(11)(t)$ is the number of messages actually ham and identified as ham (i.e., correct)
 
 
 == Accuracy
