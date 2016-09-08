@@ -22,6 +22,20 @@ image::../report/uniqwords-boxplot.png[]
 
 image::../report/uniq-lessoutliers.png[]
 
+== Data
+[cols="asciidoc,asciidoc"]
+|=====================
+|
+
+image::../report/wordcloud-ham.png[]
+
+.1+|
+
+image::../report/wordcloud-spam.png[]
+
+|=====================
+
+
 
   
 == Four Contrived Sample Documents

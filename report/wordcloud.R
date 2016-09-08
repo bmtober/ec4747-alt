@@ -3,7 +3,7 @@
 library('tm')
 library('wordcloud')
 
-png("wordcloud-ham.png")
+png("wordcloud-ham.png", width=400, height=400)
 text <- Corpus(VectorSource(readLines("subjects.ham")))
 text <- tm_map(text, stripWhitespace)
 #text <- tm_map(text, tolower)
@@ -12,7 +12,7 @@ text <- tm_map(text, stripWhitespace)
 wordcloud(text, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
 dev.off()
 
-png("wordcloud-spam.png")
+png("wordcloud-spam.png", width=400, height=400)
 text <- Corpus(VectorSource(readLines("subjects.spam")))
 text <- tm_map(text, stripWhitespace)
 #text <- tm_map(text, tolower)
