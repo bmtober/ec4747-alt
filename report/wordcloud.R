@@ -1,0 +1,23 @@
+# install.packages("tm")
+# install.packages("wordcloud")
+library('tm')
+library('wordcloud')
+
+png("wordcloud-ham.png")
+text <- Corpus(VectorSource(readLines("subjects.ham")))
+text <- tm_map(text, stripWhitespace)
+#text <- tm_map(text, tolower)
+#text <- tm_map(text, removeWords, stopwords("english"))
+#text <- tm_map(text, stemDocument)
+wordcloud(text, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+dev.off()
+
+png("wordcloud-spam.png")
+text <- Corpus(VectorSource(readLines("subjects.spam")))
+text <- tm_map(text, stripWhitespace)
+#text <- tm_map(text, tolower)
+#text <- tm_map(text, removeWords, stopwords("english"))
+#text <- tm_map(text, stemDocument)
+wordcloud(text, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+dev.off()
+
