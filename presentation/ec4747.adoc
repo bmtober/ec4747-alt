@@ -382,6 +382,51 @@ $ cos(x,y) = (x*y)/(| x || y |)  $
 
 between vectors $x$ and $y$.
 
+== Cosine Similarity
+
+$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(35) + sqrt(41)) = 0.105593 $
+
+[cols="asciidoc,asciidoc"]
+|=====================
+|
+..........................
+==>> examples/poem.term <<==
+      3 and
+      2 the
+      2 fox
+      2 dog
+      2 brown
+      2 The
+      1 white
+      1 up
+      1 sleeping
+      1 said
+      1 over
+      1 nimble
+      1 looked
+      1 jumped
+      1 black
+      1 awoke
+      1 at
+      1 Woof
+..........................
+
+.1+|
+..........................
+==>> examples/song.term <<==
+      5 ding
+      2 da
+      1 the
+      1 say
+      1 fox
+      1 does
+      1 What
+      1 Ding
+..........................
+|=====================
+
+
+
 
 == Document Similarity
 

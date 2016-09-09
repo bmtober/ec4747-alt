@@ -5267,6 +5267,59 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 <div class="sect1 slide">
+<h1 id="_cosine_similarity_2">Cosine Similarity</h1>
+<div class="sectionbody" style="max-width:80">
+<div class="paragraph"><p>$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(35) + sqrt(41)) = 0.105593 $</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><div><div class="literalblock">
+<div class="content">
+<pre><code>==&gt;&gt; examples/poem.term &lt;&lt;==
+      3 and
+      2 the
+      2 fox
+      2 dog
+      2 brown
+      2 The
+      1 white
+      1 up
+      1 sleeping
+      1 said
+      1 over
+      1 nimble
+      1 looked
+      1 jumped
+      1 black
+      1 awoke
+      1 at
+      1 Woof</code></pre>
+</div></div></div></td>
+<td align="left" valign="top"><div><div class="literalblock">
+<div class="content">
+<pre><code>==&gt;&gt; examples/song.term &lt;&lt;==
+      5 ding
+      2 da
+      1 the
+      1 say
+      1 fox
+      1 does
+      1 What
+      1 Ding</code></pre>
+</div></div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1 slide">
 <h1 id="_document_similarity">Document Similarity</h1>
 <div class="sectionbody" style="max-width:80">
 <div class="paragraph"><p>$ s_h = cos(v_(tfidf), e_h) = $ "hamminess"</p></div>
