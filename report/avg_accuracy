@@ -1,0 +1,24 @@
+
+
+d=document_similarity
+a=average_term_similarity
+t=top_ten_term_similarity
+f=average_tfidf_similarity
+
+echo "Scenario, Maximum Average Accuracy" > "avg_accuracy.csv"
+for x in $d $a $t $f
+do
+  echo $x
+  awk '{print $6, $7}' "$x.acc.1500" > .avg_accuracy.1
+  for n in 2000 2500 3000 3500 4000
+  do
+    awk '{print $6, $7}' "$x.acc.$n" > .avg_accuracy.2
+    vsum .avg_accuracy.1 .avg_accuracy.2 > "$x.acc.avg"
+    cp "$x.acc.avg"  .avg_accuracy.1
+  done
+  awk '{print $1/6, $2}' .avg_accuracy.1 |sort -n -k 2 > "$x.acc.avg"
+  echo -n "$x, " >> "avg_accuracy.csv"
+  awk '{print $1}' "$x.acc.avg" | sort -nr | head -n 1 >> "avg_accuracy.csv"
+done
+
+

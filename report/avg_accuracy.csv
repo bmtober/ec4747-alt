@@ -1,0 +1,5 @@
+Scenario, Maximum Average Accuracy
+document_similarity, 0.955333
+average_term_similarity, 0.942333
+top_ten_term_similarity, 0.892
+average_tfidf_similarity, 0.958
