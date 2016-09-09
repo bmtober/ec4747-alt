@@ -384,7 +384,7 @@ between vectors $x$ and $y$.
 
 == Cosine Similarity
 
-$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(35) + sqrt(41)) = 0.105593 $
+$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(41) + sqrt(35)) = 0.105593 $
 
 [cols="asciidoc,asciidoc"]
 |=====================
