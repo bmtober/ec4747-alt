@@ -147,6 +147,119 @@ Spam
       1 Ding
 ..........................
 
+== Term Vectors
+..........................
+==> spam.term <==
+      1 Spam
+
+..........................
+
+== Term Vectors
+..........................
+==> skit.term <==
+     95 spam
+     19 and
+     13 egg
+     13 a
+     11 Lovely
+     10 bacon
+     10 Waitress
+     10 Vikings
+      9 sausage
+      7 t
+      7 Wife
+      7 Spam
+      7 Man
+      7 I
+      6 it
+      5 the
+      5 got
+      4 you
+      4 with
+      4 in
+      4 have
+      4 don
+      4 beans
+      4 Wonderful
+      4 Well
+      3 without
+      3 up
+      3 s
+      3 You
+      3 Shut
+      2 there
+      2 then
+      2 spa
+      2 much
+      2 mean
+      2 like
+      2 her
+      2 do
+      2 dear
+      2 can
+      2 baked
+      2 as
+      2 am
+      2 Urgghh
+      2 Morning
+      1 your
+      1 words
+      1 what
+      1 want
+      1 ve
+      1 truffle
+      1 top
+      1 too
+      1 tomato
+      1 through
+      1 that
+      1 stop
+      1 sit
+      1 she
+      1 shallots
+      1 served
+      1 sauce
+      1 right
+      1 pate
+      1 or
+      1 on
+      1 off
+      1 of
+      1 not
+      1 next
+      1 mornay
+      1 manner
+      1 m
+      1 love
+      1 ll
+      1 lines
+      1 late
+      1 is
+      1 instead
+      1 here
+      1 having
+      1 has
+      1 garnished
+      1 fuss
+      1 fried
+      1 few
+      1 elaborately
+      1 drown
+      1 could
+      1 cause
+      1 but
+      1 brandy
+      1 beaked
+      1 aubergines
+      1 are
+      1 anything
+      1 Why
+      1 What
+      1 Thermidor
+      1 THAT
+..........................
+
+
 == Term-Frequency/Inverse Document Frequency
 
 $ tf$-$idf(t,d,D) = tf(t,d) * log(M/(df(t,D))) $
@@ -384,7 +497,7 @@ between vectors $x$ and $y$.
 
 == Cosine Similarity
 
-$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(41) + sqrt(35)) = 0.105593 $
+$ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(41) sqrt(35)) = 0.105593 $
 
 [cols="asciidoc,asciidoc"]
 |=====================
@@ -424,7 +537,6 @@ $ cos(song, poem) = (2xx1 + 2xx1)/(sqrt(41) + sqrt(35)) = 0.105593 $
       1 Ding
 ..........................
 |=====================
-
 
 
 
