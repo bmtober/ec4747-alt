@@ -136,8 +136,16 @@ acc: document_similarity.acc average_term_similarity.acc top_ten_term_similarity
 	@date
 
 %.acc: %.csv
-	# compute performance 
+	# compute accuracy
 	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, (m00+m11)/NR, t)}' >> $@
+
+roc: document_similarity.roc average_term_similarity.roc top_ten_term_similarity.roc average_tfidf_similarity.roc
+	@echo -n "Finished '$@' target at"
+	@date
+
+%.roc: %.csv
+	# compute reciever operating characteristic 
+	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, m01/NR, m11/NR)}' >> $@
 
 %.csv: %.spam %.ham
 	# Since spam is listed first above, the joined file below will 

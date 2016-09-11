@@ -49,9 +49,18 @@ do
     make acc
   done
 
+  for i in {0..40}
+  do
+    export threshold=$(bc -l <<< "($i+5)/25")
+    rm *.csv
+    make roc 
+  done
+
   pushd "${outputdir}"
   mv $OLDPWD/*.acc ./
+  mv $OLDPWD/*.roc ./
   rename ".acc" ".acc.$n" *.acc
+  rename ".roc" ".roc.$n" *.roc
   popd
 
 done
