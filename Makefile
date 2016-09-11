@@ -145,7 +145,7 @@ roc: document_similarity.roc average_term_similarity.roc top_ten_term_similarity
 
 %.roc: %.csv
 	# compute reciever operating characteristic 
-	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, m01/NR, m11/NR)}' >> $@
+	body $< | awk -v t=$(threshold) '{m00=m00+($$5==0 && $$4==0)}; {m01=m01+($$5==0 && $$4==1)}; {m10=m10+($$5==1 && $$4==0)}; {m11=m11+($$5==1 && $$4==1)}; END {print("$<", m00, m01, m10, m11, m00/NR, m10/NR)}' >> $@
 
 %.csv: %.spam %.ham
 	# Since spam is listed first above, the joined file below will 

@@ -51,7 +51,7 @@ do
 
   for i in {0..40}
   do
-    export threshold=$(bc -l <<< "($i+5)/25")
+    export threshold=$(bc -l <<< "($i+10)/30")
     rm *.csv
     make roc 
   done
