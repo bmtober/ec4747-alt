@@ -587,23 +587,30 @@ image::average_tfidf_frequency_example.png[]
 
 
 == Accuracy
+image::accuracy-example.png[]
+
+
+== Accuracy
 
 $ A(t) = (m_(00)(t) + m_(11)(t))/(m_(00)(t) + m_(01)(t) + m_(10)(t) + m_(11)(t)) $
 
 where 
 
-$m_(00)(t)$ is the number of messages actually spam and identified as spam (i.e, correct) 
+$m_(ij)(t)$ is the number of messages actually in class $i$ and identified as class $j$.
 
-$m_(01)(t)$ is the number of messages actually spam but identified as ham of (i.e., error)
+[cols="4*^.^"]
+|======================
+2.2+| 2+|Predicted Class 
+|Spam|Ham
+.2+|Actual Class|Spam|$m_(00)(t)$|$m_(01)(t)$
+|Ham |$m_(10)(t)$ |$m_(11)(t)$
+|======================
 
-$m_(10)(t)$ is the number of messages actually ham but identified as spam (i.e., error)
+.Note 
 
-$m_(11)(t)$ is the number of messages actually ham and identified as ham (i.e., correct)
+$i=j$ implies correct classification
 
-
-== Accuracy
-image::accuracy-example.png[]
-
+$i!=j$ implies incorrect classification
 
 == Results
 
@@ -621,6 +628,17 @@ image::../report/average_tfidf_frequency.png[]
 .1+|
 image::../report/top_ten_term_frequency.png[]
 |=====================
+
+
+== Receiver Operating Characteristic 
+image::../report/roc.png[]
+
+
+== Receiver Operating Characteristic
+
+$ P_D(t) = (m_(00)(t))/(m_(00)(t) + m_(01)(t)) $
+
+$ P_(FA)(t) = (m_(10)(t))/(m_(10)(t) + m_(11)(t)) $
 
 
 == Accuracy
