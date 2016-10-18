@@ -14,7 +14,7 @@ checkscript "vmag"
 checkscript "vscale"
 checkscript "vsum"
 checkscript "vtfidf"
-checkscript "vunit"
+checkscript "vsimplex"
 checkscript "pairs"
 checkscript "body"
 

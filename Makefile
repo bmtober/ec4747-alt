@@ -270,8 +270,8 @@ document_frequency.spam: $(SPM:%.eml=%.term)
 	touch $@
 	for f in $^; \
 	do \
-  	vunit $$f > .vunit.s; \
-		vsum .vunit.s $@  > .$@; \
+  	vsimplex $$f > .vsimplex.s; \
+		vsum .vsimplex.s $@  > .$@; \
 		mv .$@ $@; \
 	done
 	@echo -n "Finished '$@' target at"
@@ -282,8 +282,8 @@ document_frequency.ham: $(HAM:%.eml=%.term)
 	touch $@
 	for f in $^; \
 	do \
-		vunit $$f > .vunit.h; \
-		vsum .vunit.h $@  > .$@; \
+		vsimplex $$f > .vsimplex.h; \
+		vsum .vsimplex.h $@  > .$@; \
 		mv .$@ $@; \
 	done
 	@echo -n "Finished '$@' target at"
